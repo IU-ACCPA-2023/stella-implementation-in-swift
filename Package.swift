@@ -18,6 +18,12 @@ let package = Package(
             dependencies: ["Antlr4"]),
         .testTarget(
             name: "stella-implementation-in-swiftTests",
-            dependencies: ["stella-implementation-in-swift"]),
+            dependencies: ["stella-implementation-in-swift"],
+            resources: [
+                // Copy Tests/ExampleTests/Resources directories as-is.
+                // Use to retain directory structure.
+                // Will be at top level in bundle.
+                .copy("Resources"),
+              ])
     ]
 )
