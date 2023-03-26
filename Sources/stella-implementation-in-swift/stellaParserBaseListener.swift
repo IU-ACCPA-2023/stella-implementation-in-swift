@@ -184,6 +184,19 @@ open class stellaParserBaseListener: stellaParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	open func enterExprParens(_ ctx: stellaParser.ExprParensContext) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	open func exitExprParens(_ ctx: stellaParser.ExprParensContext) { }
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	open func enterNatRec(_ ctx: stellaParser.NatRecContext) { }
 	/**
 	 * {@inheritDoc}
@@ -295,6 +308,19 @@ open class stellaParserBaseListener: stellaParserListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	open func exitTypeFun(_ ctx: stellaParser.TypeFunContext) { }
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	open func enterTypeParens(_ ctx: stellaParser.TypeParensContext) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	open func exitTypeParens(_ ctx: stellaParser.TypeParensContext) { }
 
 	/**
 	 * {@inheritDoc}

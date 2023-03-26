@@ -23,6 +23,7 @@ public func build_type(ctx : stellaParser.StellatypeContext) throws -> StellaTyp
         ctx.paramTypes.map(build_type),
         build_type(ctx: ctx.returnType)
     )
+    case let ctx as stellaParser.TypeParensContext: return try build_type(ctx: ctx.type_)
     default:
         throw BuildError.UnexpectedParseContext("not a type")
     }
@@ -56,6 +57,7 @@ public func build_expr(ctx : stellaParser.ExprContext) throws -> Expr {
     )
         
     case let ctx as stellaParser.VarContext: return Expr.Var(ctx.getText())
+    case let ctx as stellaParser.ExprParensContext: return try build_expr(ctx: ctx.expr_)
         
     default:
         throw BuildError.UnexpectedParseContext("not an expr")

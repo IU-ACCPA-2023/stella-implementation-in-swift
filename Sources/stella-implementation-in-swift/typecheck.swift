@@ -16,5 +16,5 @@ public func typecheck_decl(decl : Decl) {
 }
 
 public func typecheck_program(program : Program) {
-    program.decls.map(typecheck_decl)
+    program.decls.forEach(typecheck_decl)
 }

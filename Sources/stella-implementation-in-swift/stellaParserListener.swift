@@ -179,6 +179,20 @@ public protocol stellaParserListener: ParseTreeListener {
 	 */
 	func exitVar(_ ctx: stellaParser.VarContext)
 	/**
+	 * Enter a parse tree produced by the {@code ExprParens}
+	 * labeled alternative in {@link stellaParser#expr}.
+	 - Parameters:
+	   - ctx: the parse tree
+	 */
+	func enterExprParens(_ ctx: stellaParser.ExprParensContext)
+	/**
+	 * Exit a parse tree produced by the {@code ExprParens}
+	 * labeled alternative in {@link stellaParser#expr}.
+	 - Parameters:
+	   - ctx: the parse tree
+	 */
+	func exitExprParens(_ ctx: stellaParser.ExprParensContext)
+	/**
 	 * Enter a parse tree produced by the {@code NatRec}
 	 * labeled alternative in {@link stellaParser#expr}.
 	 - Parameters:
@@ -304,4 +318,18 @@ public protocol stellaParserListener: ParseTreeListener {
 	   - ctx: the parse tree
 	 */
 	func exitTypeFun(_ ctx: stellaParser.TypeFunContext)
+	/**
+	 * Enter a parse tree produced by the {@code TypeParens}
+	 * labeled alternative in {@link stellaParser#stellatype}.
+	 - Parameters:
+	   - ctx: the parse tree
+	 */
+	func enterTypeParens(_ ctx: stellaParser.TypeParensContext)
+	/**
+	 * Exit a parse tree produced by the {@code TypeParens}
+	 * labeled alternative in {@link stellaParser#stellatype}.
+	 - Parameters:
+	   - ctx: the parse tree
+	 */
+	func exitTypeParens(_ ctx: stellaParser.TypeParensContext)
 }

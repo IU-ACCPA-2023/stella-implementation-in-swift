@@ -1,11 +1,10 @@
 import Antlr4
+import Foundation
 
 @main
 public struct stella_implementation_in_swift {
-    public private(set) var text = "language core; fn main(x : Nat) -> Nat { return x; }"
-
-    public static func main() {
-        let lexer = stellaLexer(ANTLRInputStream(stella_implementation_in_swift().text));
+    public static func typecheck_file(filepath: String) {
+        let lexer = try! stellaLexer(ANTLRInputStream(String(contentsOfFile: filepath)));
         do {
             let parser = try stellaParser(CommonTokenStream(lexer))
             let ctx = try parser.program()
@@ -17,5 +16,11 @@ public struct stella_implementation_in_swift {
             print(error)
             print("Parse Error occurred. See the message above.")
         }
+    }
+    
+    public static func main() {
+        
+        assert(CommandLine.arguments[1] == "typecheck")
+        typecheck_file(filepath: CommandLine.arguments[2])
     }
 }
