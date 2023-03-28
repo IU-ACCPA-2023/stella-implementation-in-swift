@@ -8,55 +8,58 @@
 public typealias ExtensionName = String
 
 public struct Program {
-    var language_decl: LanguageDecl
+    var languageDecl: LanguageDecl
     var extensions: Array<Extension>
     var decls: Array<Decl>
 }
 
 public enum LanguageDecl {
-    case LanguageCore
+    case languageCore
 }
 
 public struct Extension {
-    var extension_names: Array<ExtensionName>
+    var extensionNames: Array<ExtensionName>
 }
 
 public enum Decl {
-    case DeclFun(
-        Array<Annotation>,
-        String,
-        Array<ParamDecl>,
-        StellaType?,
-        StellaType?,
-        Array<Decl>,
-        Expr
+    case declFun(
+        annotations: Array<Annotation>,
+        name: String,
+        paramDecls: Array<ParamDecl>,
+        returnType: StellaType?,
+        throwsType: StellaType?,
+        localDecls: Array<Decl>,
+        returnExpr: Expr
     )
-    case DeclTypeAlias(String, StellaType)
+    case declTypeAlias(
+        name: String,
+        type: StellaType
+    )
 }
 
 public enum Annotation {
-    case InlineAnnotation
+    case inlineAnnotation
 }
 
 public struct ParamDecl {
     var name: String
-    var type_: StellaType
+    var type: StellaType
 }
 
 public indirect enum Expr {
-    case If(Expr, Expr, Expr)
-    case Abstraction(Array<ParamDecl>, Expr)
-    case Application(Expr, Array<Expr>)
-    case Succ(Expr)
-    case NatRec(Expr, Expr, Expr)
-    case ConstTrue
-    case ConstFalse
-    case ConstInt(Int)
-    case Var(String)
+    case `if`(expr1: Expr, expr2: Expr, expr3: Expr)
+    case abstraction(paramDecls: Array<ParamDecl>, expr: Expr)
+    case application(expr: Expr, exprs: Array<Expr>)
+    case succ(expr: Expr)
+    case natRec(expr1: Expr, expr2: Expr, expr3: Expr)
+    case constTrue
+    case constFalse
+    case constInt(value: Int)
+    case `var`(name: String)
 }
 
 public indirect enum StellaType {
-    case Fun(Array<StellaType>, StellaType)
-    case Bool
-    case Nat
+    case fun(parameterTypes: Array<StellaType>, returnType: StellaType)
+    case bool
+    case nat
 }

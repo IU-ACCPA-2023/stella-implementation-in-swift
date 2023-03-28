@@ -10,7 +10,7 @@ public struct stella_implementation_in_swift {
             let ctx = try parser.program()
             let program = try build_program(ctx: ctx)
             
-            typecheck_program(program: program)
+            typecheck(program: program)
         }
         catch {
             print(error)
