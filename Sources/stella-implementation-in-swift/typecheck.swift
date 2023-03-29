@@ -16,6 +16,6 @@ public func typecheck(decl: Decl) {
     }
 }
 
-public func typecheck(program: Program) {
+public func typecheck(program: Program) throws {
     program.decls.forEach { typecheck(decl: $0) }
 }
