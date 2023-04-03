@@ -137,19 +137,75 @@ public protocol stellaParserListener: ParseTreeListener {
 	 */
 	func exitParamDecl(_ ctx: stellaParser.ParamDeclContext)
 	/**
-	 * Enter a parse tree produced by the {@code ConstTrue}
+	 * Enter a parse tree produced by the {@code IsEmpty}
 	 * labeled alternative in {@link stellaParser#expr}.
 	 - Parameters:
 	   - ctx: the parse tree
 	 */
-	func enterConstTrue(_ ctx: stellaParser.ConstTrueContext)
+	func enterIsEmpty(_ ctx: stellaParser.IsEmptyContext)
 	/**
-	 * Exit a parse tree produced by the {@code ConstTrue}
+	 * Exit a parse tree produced by the {@code IsEmpty}
 	 * labeled alternative in {@link stellaParser#expr}.
 	 - Parameters:
 	   - ctx: the parse tree
 	 */
-	func exitConstTrue(_ ctx: stellaParser.ConstTrueContext)
+	func exitIsEmpty(_ ctx: stellaParser.IsEmptyContext)
+	/**
+	 * Enter a parse tree produced by the {@code Fold}
+	 * labeled alternative in {@link stellaParser#expr}.
+	 - Parameters:
+	   - ctx: the parse tree
+	 */
+	func enterFold(_ ctx: stellaParser.FoldContext)
+	/**
+	 * Exit a parse tree produced by the {@code Fold}
+	 * labeled alternative in {@link stellaParser#expr}.
+	 - Parameters:
+	   - ctx: the parse tree
+	 */
+	func exitFold(_ ctx: stellaParser.FoldContext)
+	/**
+	 * Enter a parse tree produced by the {@code Add}
+	 * labeled alternative in {@link stellaParser#expr}.
+	 - Parameters:
+	   - ctx: the parse tree
+	 */
+	func enterAdd(_ ctx: stellaParser.AddContext)
+	/**
+	 * Exit a parse tree produced by the {@code Add}
+	 * labeled alternative in {@link stellaParser#expr}.
+	 - Parameters:
+	   - ctx: the parse tree
+	 */
+	func exitAdd(_ ctx: stellaParser.AddContext)
+	/**
+	 * Enter a parse tree produced by the {@code IsZero}
+	 * labeled alternative in {@link stellaParser#expr}.
+	 - Parameters:
+	   - ctx: the parse tree
+	 */
+	func enterIsZero(_ ctx: stellaParser.IsZeroContext)
+	/**
+	 * Exit a parse tree produced by the {@code IsZero}
+	 * labeled alternative in {@link stellaParser#expr}.
+	 - Parameters:
+	   - ctx: the parse tree
+	 */
+	func exitIsZero(_ ctx: stellaParser.IsZeroContext)
+	/**
+	 * Enter a parse tree produced by the {@code LessThanOrEqual}
+	 * labeled alternative in {@link stellaParser#expr}.
+	 - Parameters:
+	   - ctx: the parse tree
+	 */
+	func enterLessThanOrEqual(_ ctx: stellaParser.LessThanOrEqualContext)
+	/**
+	 * Exit a parse tree produced by the {@code LessThanOrEqual}
+	 * labeled alternative in {@link stellaParser#expr}.
+	 - Parameters:
+	   - ctx: the parse tree
+	 */
+	func exitLessThanOrEqual(_ ctx: stellaParser.LessThanOrEqualContext)
 	/**
 	 * Enter a parse tree produced by the {@code Succ}
 	 * labeled alternative in {@link stellaParser#expr}.
@@ -179,19 +235,327 @@ public protocol stellaParserListener: ParseTreeListener {
 	 */
 	func exitVar(_ ctx: stellaParser.VarContext)
 	/**
-	 * Enter a parse tree produced by the {@code ExprParens}
+	 * Enter a parse tree produced by the {@code Inl}
 	 * labeled alternative in {@link stellaParser#expr}.
 	 - Parameters:
 	   - ctx: the parse tree
 	 */
-	func enterExprParens(_ ctx: stellaParser.ExprParensContext)
+	func enterInl(_ ctx: stellaParser.InlContext)
 	/**
-	 * Exit a parse tree produced by the {@code ExprParens}
+	 * Exit a parse tree produced by the {@code Inl}
 	 * labeled alternative in {@link stellaParser#expr}.
 	 - Parameters:
 	   - ctx: the parse tree
 	 */
-	func exitExprParens(_ ctx: stellaParser.ExprParensContext)
+	func exitInl(_ ctx: stellaParser.InlContext)
+	/**
+	 * Enter a parse tree produced by the {@code GreaterThanOrEqual}
+	 * labeled alternative in {@link stellaParser#expr}.
+	 - Parameters:
+	   - ctx: the parse tree
+	 */
+	func enterGreaterThanOrEqual(_ ctx: stellaParser.GreaterThanOrEqualContext)
+	/**
+	 * Exit a parse tree produced by the {@code GreaterThanOrEqual}
+	 * labeled alternative in {@link stellaParser#expr}.
+	 - Parameters:
+	   - ctx: the parse tree
+	 */
+	func exitGreaterThanOrEqual(_ ctx: stellaParser.GreaterThanOrEqualContext)
+	/**
+	 * Enter a parse tree produced by the {@code Inr}
+	 * labeled alternative in {@link stellaParser#expr}.
+	 - Parameters:
+	   - ctx: the parse tree
+	 */
+	func enterInr(_ ctx: stellaParser.InrContext)
+	/**
+	 * Exit a parse tree produced by the {@code Inr}
+	 * labeled alternative in {@link stellaParser#expr}.
+	 - Parameters:
+	   - ctx: the parse tree
+	 */
+	func exitInr(_ ctx: stellaParser.InrContext)
+	/**
+	 * Enter a parse tree produced by the {@code Divide}
+	 * labeled alternative in {@link stellaParser#expr}.
+	 - Parameters:
+	   - ctx: the parse tree
+	 */
+	func enterDivide(_ ctx: stellaParser.DivideContext)
+	/**
+	 * Exit a parse tree produced by the {@code Divide}
+	 * labeled alternative in {@link stellaParser#expr}.
+	 - Parameters:
+	   - ctx: the parse tree
+	 */
+	func exitDivide(_ ctx: stellaParser.DivideContext)
+	/**
+	 * Enter a parse tree produced by the {@code LessThan}
+	 * labeled alternative in {@link stellaParser#expr}.
+	 - Parameters:
+	   - ctx: the parse tree
+	 */
+	func enterLessThan(_ ctx: stellaParser.LessThanContext)
+	/**
+	 * Exit a parse tree produced by the {@code LessThan}
+	 * labeled alternative in {@link stellaParser#expr}.
+	 - Parameters:
+	   - ctx: the parse tree
+	 */
+	func exitLessThan(_ ctx: stellaParser.LessThanContext)
+	/**
+	 * Enter a parse tree produced by the {@code LogicNot}
+	 * labeled alternative in {@link stellaParser#expr}.
+	 - Parameters:
+	   - ctx: the parse tree
+	 */
+	func enterLogicNot(_ ctx: stellaParser.LogicNotContext)
+	/**
+	 * Exit a parse tree produced by the {@code LogicNot}
+	 * labeled alternative in {@link stellaParser#expr}.
+	 - Parameters:
+	   - ctx: the parse tree
+	 */
+	func exitLogicNot(_ ctx: stellaParser.LogicNotContext)
+	/**
+	 * Enter a parse tree produced by the {@code DotRecord}
+	 * labeled alternative in {@link stellaParser#expr}.
+	 - Parameters:
+	   - ctx: the parse tree
+	 */
+	func enterDotRecord(_ ctx: stellaParser.DotRecordContext)
+	/**
+	 * Exit a parse tree produced by the {@code DotRecord}
+	 * labeled alternative in {@link stellaParser#expr}.
+	 - Parameters:
+	   - ctx: the parse tree
+	 */
+	func exitDotRecord(_ ctx: stellaParser.DotRecordContext)
+	/**
+	 * Enter a parse tree produced by the {@code ParenthesisedExpr}
+	 * labeled alternative in {@link stellaParser#expr}.
+	 - Parameters:
+	   - ctx: the parse tree
+	 */
+	func enterParenthesisedExpr(_ ctx: stellaParser.ParenthesisedExprContext)
+	/**
+	 * Exit a parse tree produced by the {@code ParenthesisedExpr}
+	 * labeled alternative in {@link stellaParser#expr}.
+	 - Parameters:
+	   - ctx: the parse tree
+	 */
+	func exitParenthesisedExpr(_ ctx: stellaParser.ParenthesisedExprContext)
+	/**
+	 * Enter a parse tree produced by the {@code GreaterThan}
+	 * labeled alternative in {@link stellaParser#expr}.
+	 - Parameters:
+	   - ctx: the parse tree
+	 */
+	func enterGreaterThan(_ ctx: stellaParser.GreaterThanContext)
+	/**
+	 * Exit a parse tree produced by the {@code GreaterThan}
+	 * labeled alternative in {@link stellaParser#expr}.
+	 - Parameters:
+	   - ctx: the parse tree
+	 */
+	func exitGreaterThan(_ ctx: stellaParser.GreaterThanContext)
+	/**
+	 * Enter a parse tree produced by the {@code Equal}
+	 * labeled alternative in {@link stellaParser#expr}.
+	 - Parameters:
+	   - ctx: the parse tree
+	 */
+	func enterEqual(_ ctx: stellaParser.EqualContext)
+	/**
+	 * Exit a parse tree produced by the {@code Equal}
+	 * labeled alternative in {@link stellaParser#expr}.
+	 - Parameters:
+	   - ctx: the parse tree
+	 */
+	func exitEqual(_ ctx: stellaParser.EqualContext)
+	/**
+	 * Enter a parse tree produced by the {@code Tail}
+	 * labeled alternative in {@link stellaParser#expr}.
+	 - Parameters:
+	   - ctx: the parse tree
+	 */
+	func enterTail(_ ctx: stellaParser.TailContext)
+	/**
+	 * Exit a parse tree produced by the {@code Tail}
+	 * labeled alternative in {@link stellaParser#expr}.
+	 - Parameters:
+	   - ctx: the parse tree
+	 */
+	func exitTail(_ ctx: stellaParser.TailContext)
+	/**
+	 * Enter a parse tree produced by the {@code Multiply}
+	 * labeled alternative in {@link stellaParser#expr}.
+	 - Parameters:
+	   - ctx: the parse tree
+	 */
+	func enterMultiply(_ ctx: stellaParser.MultiplyContext)
+	/**
+	 * Exit a parse tree produced by the {@code Multiply}
+	 * labeled alternative in {@link stellaParser#expr}.
+	 - Parameters:
+	   - ctx: the parse tree
+	 */
+	func exitMultiply(_ ctx: stellaParser.MultiplyContext)
+	/**
+	 * Enter a parse tree produced by the {@code Record}
+	 * labeled alternative in {@link stellaParser#expr}.
+	 - Parameters:
+	   - ctx: the parse tree
+	 */
+	func enterRecord(_ ctx: stellaParser.RecordContext)
+	/**
+	 * Exit a parse tree produced by the {@code Record}
+	 * labeled alternative in {@link stellaParser#expr}.
+	 - Parameters:
+	   - ctx: the parse tree
+	 */
+	func exitRecord(_ ctx: stellaParser.RecordContext)
+	/**
+	 * Enter a parse tree produced by the {@code List}
+	 * labeled alternative in {@link stellaParser#expr}.
+	 - Parameters:
+	   - ctx: the parse tree
+	 */
+	func enterList(_ ctx: stellaParser.ListContext)
+	/**
+	 * Exit a parse tree produced by the {@code List}
+	 * labeled alternative in {@link stellaParser#expr}.
+	 - Parameters:
+	   - ctx: the parse tree
+	 */
+	func exitList(_ ctx: stellaParser.ListContext)
+	/**
+	 * Enter a parse tree produced by the {@code LogicAnd}
+	 * labeled alternative in {@link stellaParser#expr}.
+	 - Parameters:
+	   - ctx: the parse tree
+	 */
+	func enterLogicAnd(_ ctx: stellaParser.LogicAndContext)
+	/**
+	 * Exit a parse tree produced by the {@code LogicAnd}
+	 * labeled alternative in {@link stellaParser#expr}.
+	 - Parameters:
+	   - ctx: the parse tree
+	 */
+	func exitLogicAnd(_ ctx: stellaParser.LogicAndContext)
+	/**
+	 * Enter a parse tree produced by the {@code LogicOr}
+	 * labeled alternative in {@link stellaParser#expr}.
+	 - Parameters:
+	   - ctx: the parse tree
+	 */
+	func enterLogicOr(_ ctx: stellaParser.LogicOrContext)
+	/**
+	 * Exit a parse tree produced by the {@code LogicOr}
+	 * labeled alternative in {@link stellaParser#expr}.
+	 - Parameters:
+	   - ctx: the parse tree
+	 */
+	func exitLogicOr(_ ctx: stellaParser.LogicOrContext)
+	/**
+	 * Enter a parse tree produced by the {@code Head}
+	 * labeled alternative in {@link stellaParser#expr}.
+	 - Parameters:
+	   - ctx: the parse tree
+	 */
+	func enterHead(_ ctx: stellaParser.HeadContext)
+	/**
+	 * Exit a parse tree produced by the {@code Head}
+	 * labeled alternative in {@link stellaParser#expr}.
+	 - Parameters:
+	   - ctx: the parse tree
+	 */
+	func exitHead(_ ctx: stellaParser.HeadContext)
+	/**
+	 * Enter a parse tree produced by the {@code TerminatingSemicolon}
+	 * labeled alternative in {@link stellaParser#expr}.
+	 - Parameters:
+	   - ctx: the parse tree
+	 */
+	func enterTerminatingSemicolon(_ ctx: stellaParser.TerminatingSemicolonContext)
+	/**
+	 * Exit a parse tree produced by the {@code TerminatingSemicolon}
+	 * labeled alternative in {@link stellaParser#expr}.
+	 - Parameters:
+	   - ctx: the parse tree
+	 */
+	func exitTerminatingSemicolon(_ ctx: stellaParser.TerminatingSemicolonContext)
+	/**
+	 * Enter a parse tree produced by the {@code NotEqual}
+	 * labeled alternative in {@link stellaParser#expr}.
+	 - Parameters:
+	   - ctx: the parse tree
+	 */
+	func enterNotEqual(_ ctx: stellaParser.NotEqualContext)
+	/**
+	 * Exit a parse tree produced by the {@code NotEqual}
+	 * labeled alternative in {@link stellaParser#expr}.
+	 - Parameters:
+	   - ctx: the parse tree
+	 */
+	func exitNotEqual(_ ctx: stellaParser.NotEqualContext)
+	/**
+	 * Enter a parse tree produced by the {@code ConstUnit}
+	 * labeled alternative in {@link stellaParser#expr}.
+	 - Parameters:
+	   - ctx: the parse tree
+	 */
+	func enterConstUnit(_ ctx: stellaParser.ConstUnitContext)
+	/**
+	 * Exit a parse tree produced by the {@code ConstUnit}
+	 * labeled alternative in {@link stellaParser#expr}.
+	 - Parameters:
+	   - ctx: the parse tree
+	 */
+	func exitConstUnit(_ ctx: stellaParser.ConstUnitContext)
+	/**
+	 * Enter a parse tree produced by the {@code Pred}
+	 * labeled alternative in {@link stellaParser#expr}.
+	 - Parameters:
+	   - ctx: the parse tree
+	 */
+	func enterPred(_ ctx: stellaParser.PredContext)
+	/**
+	 * Exit a parse tree produced by the {@code Pred}
+	 * labeled alternative in {@link stellaParser#expr}.
+	 - Parameters:
+	   - ctx: the parse tree
+	 */
+	func exitPred(_ ctx: stellaParser.PredContext)
+	/**
+	 * Enter a parse tree produced by the {@code match}
+	 * labeled alternative in {@link stellaParser#expr}.
+	 - Parameters:
+	   - ctx: the parse tree
+	 */
+	func enterMatch(_ ctx: stellaParser.MatchContext)
+	/**
+	 * Exit a parse tree produced by the {@code match}
+	 * labeled alternative in {@link stellaParser#expr}.
+	 - Parameters:
+	   - ctx: the parse tree
+	 */
+	func exitMatch(_ ctx: stellaParser.MatchContext)
+	/**
+	 * Enter a parse tree produced by the {@code TypeAsc}
+	 * labeled alternative in {@link stellaParser#expr}.
+	 - Parameters:
+	   - ctx: the parse tree
+	 */
+	func enterTypeAsc(_ ctx: stellaParser.TypeAscContext)
+	/**
+	 * Exit a parse tree produced by the {@code TypeAsc}
+	 * labeled alternative in {@link stellaParser#expr}.
+	 - Parameters:
+	   - ctx: the parse tree
+	 */
+	func exitTypeAsc(_ ctx: stellaParser.TypeAscContext)
 	/**
 	 * Enter a parse tree produced by the {@code NatRec}
 	 * labeled alternative in {@link stellaParser#expr}.
@@ -206,6 +570,20 @@ public protocol stellaParserListener: ParseTreeListener {
 	   - ctx: the parse tree
 	 */
 	func exitNatRec(_ ctx: stellaParser.NatRecContext)
+	/**
+	 * Enter a parse tree produced by the {@code Sequence}
+	 * labeled alternative in {@link stellaParser#expr}.
+	 - Parameters:
+	   - ctx: the parse tree
+	 */
+	func enterSequence(_ ctx: stellaParser.SequenceContext)
+	/**
+	 * Exit a parse tree produced by the {@code Sequence}
+	 * labeled alternative in {@link stellaParser#expr}.
+	 - Parameters:
+	   - ctx: the parse tree
+	 */
+	func exitSequence(_ ctx: stellaParser.SequenceContext)
 	/**
 	 * Enter a parse tree produced by the {@code ConstFalse}
 	 * labeled alternative in {@link stellaParser#expr}.
@@ -235,20 +613,6 @@ public protocol stellaParserListener: ParseTreeListener {
 	 */
 	func exitAbstraction(_ ctx: stellaParser.AbstractionContext)
 	/**
-	 * Enter a parse tree produced by the {@code If}
-	 * labeled alternative in {@link stellaParser#expr}.
-	 - Parameters:
-	   - ctx: the parse tree
-	 */
-	func enterIf(_ ctx: stellaParser.IfContext)
-	/**
-	 * Exit a parse tree produced by the {@code If}
-	 * labeled alternative in {@link stellaParser#expr}.
-	 - Parameters:
-	   - ctx: the parse tree
-	 */
-	func exitIf(_ ctx: stellaParser.IfContext)
-	/**
 	 * Enter a parse tree produced by the {@code ConstInt}
 	 * labeled alternative in {@link stellaParser#expr}.
 	 - Parameters:
@@ -263,6 +627,118 @@ public protocol stellaParserListener: ParseTreeListener {
 	 */
 	func exitConstInt(_ ctx: stellaParser.ConstIntContext)
 	/**
+	 * Enter a parse tree produced by the {@code Unfold}
+	 * labeled alternative in {@link stellaParser#expr}.
+	 - Parameters:
+	   - ctx: the parse tree
+	 */
+	func enterUnfold(_ ctx: stellaParser.UnfoldContext)
+	/**
+	 * Exit a parse tree produced by the {@code Unfold}
+	 * labeled alternative in {@link stellaParser#expr}.
+	 - Parameters:
+	   - ctx: the parse tree
+	 */
+	func exitUnfold(_ ctx: stellaParser.UnfoldContext)
+	/**
+	 * Enter a parse tree produced by the {@code Variant}
+	 * labeled alternative in {@link stellaParser#expr}.
+	 - Parameters:
+	   - ctx: the parse tree
+	 */
+	func enterVariant(_ ctx: stellaParser.VariantContext)
+	/**
+	 * Exit a parse tree produced by the {@code Variant}
+	 * labeled alternative in {@link stellaParser#expr}.
+	 - Parameters:
+	   - ctx: the parse tree
+	 */
+	func exitVariant(_ ctx: stellaParser.VariantContext)
+	/**
+	 * Enter a parse tree produced by the {@code ConstTrue}
+	 * labeled alternative in {@link stellaParser#expr}.
+	 - Parameters:
+	   - ctx: the parse tree
+	 */
+	func enterConstTrue(_ ctx: stellaParser.ConstTrueContext)
+	/**
+	 * Exit a parse tree produced by the {@code ConstTrue}
+	 * labeled alternative in {@link stellaParser#expr}.
+	 - Parameters:
+	   - ctx: the parse tree
+	 */
+	func exitConstTrue(_ ctx: stellaParser.ConstTrueContext)
+	/**
+	 * Enter a parse tree produced by the {@code DotTuple}
+	 * labeled alternative in {@link stellaParser#expr}.
+	 - Parameters:
+	   - ctx: the parse tree
+	 */
+	func enterDotTuple(_ ctx: stellaParser.DotTupleContext)
+	/**
+	 * Exit a parse tree produced by the {@code DotTuple}
+	 * labeled alternative in {@link stellaParser#expr}.
+	 - Parameters:
+	   - ctx: the parse tree
+	 */
+	func exitDotTuple(_ ctx: stellaParser.DotTupleContext)
+	/**
+	 * Enter a parse tree produced by the {@code Fix}
+	 * labeled alternative in {@link stellaParser#expr}.
+	 - Parameters:
+	   - ctx: the parse tree
+	 */
+	func enterFix(_ ctx: stellaParser.FixContext)
+	/**
+	 * Exit a parse tree produced by the {@code Fix}
+	 * labeled alternative in {@link stellaParser#expr}.
+	 - Parameters:
+	   - ctx: the parse tree
+	 */
+	func exitFix(_ ctx: stellaParser.FixContext)
+	/**
+	 * Enter a parse tree produced by the {@code Subtract}
+	 * labeled alternative in {@link stellaParser#expr}.
+	 - Parameters:
+	   - ctx: the parse tree
+	 */
+	func enterSubtract(_ ctx: stellaParser.SubtractContext)
+	/**
+	 * Exit a parse tree produced by the {@code Subtract}
+	 * labeled alternative in {@link stellaParser#expr}.
+	 - Parameters:
+	   - ctx: the parse tree
+	 */
+	func exitSubtract(_ ctx: stellaParser.SubtractContext)
+	/**
+	 * Enter a parse tree produced by the {@code Let}
+	 * labeled alternative in {@link stellaParser#expr}.
+	 - Parameters:
+	   - ctx: the parse tree
+	 */
+	func enterLet(_ ctx: stellaParser.LetContext)
+	/**
+	 * Exit a parse tree produced by the {@code Let}
+	 * labeled alternative in {@link stellaParser#expr}.
+	 - Parameters:
+	   - ctx: the parse tree
+	 */
+	func exitLet(_ ctx: stellaParser.LetContext)
+	/**
+	 * Enter a parse tree produced by the {@code If}
+	 * labeled alternative in {@link stellaParser#expr}.
+	 - Parameters:
+	   - ctx: the parse tree
+	 */
+	func enterIf(_ ctx: stellaParser.IfContext)
+	/**
+	 * Exit a parse tree produced by the {@code If}
+	 * labeled alternative in {@link stellaParser#expr}.
+	 - Parameters:
+	   - ctx: the parse tree
+	 */
+	func exitIf(_ ctx: stellaParser.IfContext)
+	/**
 	 * Enter a parse tree produced by the {@code Application}
 	 * labeled alternative in {@link stellaParser#expr}.
 	 - Parameters:
@@ -276,6 +752,334 @@ public protocol stellaParserListener: ParseTreeListener {
 	   - ctx: the parse tree
 	 */
 	func exitApplication(_ ctx: stellaParser.ApplicationContext)
+	/**
+	 * Enter a parse tree produced by the {@code Tuple}
+	 * labeled alternative in {@link stellaParser#expr}.
+	 - Parameters:
+	   - ctx: the parse tree
+	 */
+	func enterTuple(_ ctx: stellaParser.TupleContext)
+	/**
+	 * Exit a parse tree produced by the {@code Tuple}
+	 * labeled alternative in {@link stellaParser#expr}.
+	 - Parameters:
+	   - ctx: the parse tree
+	 */
+	func exitTuple(_ ctx: stellaParser.TupleContext)
+	/**
+	 * Enter a parse tree produced by the {@code ConsList}
+	 * labeled alternative in {@link stellaParser#expr}.
+	 - Parameters:
+	   - ctx: the parse tree
+	 */
+	func enterConsList(_ ctx: stellaParser.ConsListContext)
+	/**
+	 * Exit a parse tree produced by the {@code ConsList}
+	 * labeled alternative in {@link stellaParser#expr}.
+	 - Parameters:
+	   - ctx: the parse tree
+	 */
+	func exitConsList(_ ctx: stellaParser.ConsListContext)
+	/**
+	 * Enter a parse tree produced by {@link stellaParser#patternBinding}.
+	 - Parameters:
+	   - ctx: the parse tree
+	 */
+	func enterPatternBinding(_ ctx: stellaParser.PatternBindingContext)
+	/**
+	 * Exit a parse tree produced by {@link stellaParser#patternBinding}.
+	 - Parameters:
+	   - ctx: the parse tree
+	 */
+	func exitPatternBinding(_ ctx: stellaParser.PatternBindingContext)
+	/**
+	 * Enter a parse tree produced by {@link stellaParser#binding}.
+	 - Parameters:
+	   - ctx: the parse tree
+	 */
+	func enterBinding(_ ctx: stellaParser.BindingContext)
+	/**
+	 * Exit a parse tree produced by {@link stellaParser#binding}.
+	 - Parameters:
+	   - ctx: the parse tree
+	 */
+	func exitBinding(_ ctx: stellaParser.BindingContext)
+	/**
+	 * Enter a parse tree produced by {@link stellaParser#match_case}.
+	 - Parameters:
+	   - ctx: the parse tree
+	 */
+	func enterMatch_case(_ ctx: stellaParser.Match_caseContext)
+	/**
+	 * Exit a parse tree produced by {@link stellaParser#match_case}.
+	 - Parameters:
+	   - ctx: the parse tree
+	 */
+	func exitMatch_case(_ ctx: stellaParser.Match_caseContext)
+	/**
+	 * Enter a parse tree produced by the {@code PatternVariant}
+	 * labeled alternative in {@link stellaParser#pattern}.
+	 - Parameters:
+	   - ctx: the parse tree
+	 */
+	func enterPatternVariant(_ ctx: stellaParser.PatternVariantContext)
+	/**
+	 * Exit a parse tree produced by the {@code PatternVariant}
+	 * labeled alternative in {@link stellaParser#pattern}.
+	 - Parameters:
+	   - ctx: the parse tree
+	 */
+	func exitPatternVariant(_ ctx: stellaParser.PatternVariantContext)
+	/**
+	 * Enter a parse tree produced by the {@code PatternInl}
+	 * labeled alternative in {@link stellaParser#pattern}.
+	 - Parameters:
+	   - ctx: the parse tree
+	 */
+	func enterPatternInl(_ ctx: stellaParser.PatternInlContext)
+	/**
+	 * Exit a parse tree produced by the {@code PatternInl}
+	 * labeled alternative in {@link stellaParser#pattern}.
+	 - Parameters:
+	   - ctx: the parse tree
+	 */
+	func exitPatternInl(_ ctx: stellaParser.PatternInlContext)
+	/**
+	 * Enter a parse tree produced by the {@code PatternInr}
+	 * labeled alternative in {@link stellaParser#pattern}.
+	 - Parameters:
+	   - ctx: the parse tree
+	 */
+	func enterPatternInr(_ ctx: stellaParser.PatternInrContext)
+	/**
+	 * Exit a parse tree produced by the {@code PatternInr}
+	 * labeled alternative in {@link stellaParser#pattern}.
+	 - Parameters:
+	   - ctx: the parse tree
+	 */
+	func exitPatternInr(_ ctx: stellaParser.PatternInrContext)
+	/**
+	 * Enter a parse tree produced by the {@code PatternTuple}
+	 * labeled alternative in {@link stellaParser#pattern}.
+	 - Parameters:
+	   - ctx: the parse tree
+	 */
+	func enterPatternTuple(_ ctx: stellaParser.PatternTupleContext)
+	/**
+	 * Exit a parse tree produced by the {@code PatternTuple}
+	 * labeled alternative in {@link stellaParser#pattern}.
+	 - Parameters:
+	   - ctx: the parse tree
+	 */
+	func exitPatternTuple(_ ctx: stellaParser.PatternTupleContext)
+	/**
+	 * Enter a parse tree produced by the {@code PatternRecord}
+	 * labeled alternative in {@link stellaParser#pattern}.
+	 - Parameters:
+	   - ctx: the parse tree
+	 */
+	func enterPatternRecord(_ ctx: stellaParser.PatternRecordContext)
+	/**
+	 * Exit a parse tree produced by the {@code PatternRecord}
+	 * labeled alternative in {@link stellaParser#pattern}.
+	 - Parameters:
+	   - ctx: the parse tree
+	 */
+	func exitPatternRecord(_ ctx: stellaParser.PatternRecordContext)
+	/**
+	 * Enter a parse tree produced by the {@code PatternList}
+	 * labeled alternative in {@link stellaParser#pattern}.
+	 - Parameters:
+	   - ctx: the parse tree
+	 */
+	func enterPatternList(_ ctx: stellaParser.PatternListContext)
+	/**
+	 * Exit a parse tree produced by the {@code PatternList}
+	 * labeled alternative in {@link stellaParser#pattern}.
+	 - Parameters:
+	   - ctx: the parse tree
+	 */
+	func exitPatternList(_ ctx: stellaParser.PatternListContext)
+	/**
+	 * Enter a parse tree produced by the {@code PatternCons}
+	 * labeled alternative in {@link stellaParser#pattern}.
+	 - Parameters:
+	   - ctx: the parse tree
+	 */
+	func enterPatternCons(_ ctx: stellaParser.PatternConsContext)
+	/**
+	 * Exit a parse tree produced by the {@code PatternCons}
+	 * labeled alternative in {@link stellaParser#pattern}.
+	 - Parameters:
+	   - ctx: the parse tree
+	 */
+	func exitPatternCons(_ ctx: stellaParser.PatternConsContext)
+	/**
+	 * Enter a parse tree produced by the {@code PatternFalse}
+	 * labeled alternative in {@link stellaParser#pattern}.
+	 - Parameters:
+	   - ctx: the parse tree
+	 */
+	func enterPatternFalse(_ ctx: stellaParser.PatternFalseContext)
+	/**
+	 * Exit a parse tree produced by the {@code PatternFalse}
+	 * labeled alternative in {@link stellaParser#pattern}.
+	 - Parameters:
+	   - ctx: the parse tree
+	 */
+	func exitPatternFalse(_ ctx: stellaParser.PatternFalseContext)
+	/**
+	 * Enter a parse tree produced by the {@code PatternTrue}
+	 * labeled alternative in {@link stellaParser#pattern}.
+	 - Parameters:
+	   - ctx: the parse tree
+	 */
+	func enterPatternTrue(_ ctx: stellaParser.PatternTrueContext)
+	/**
+	 * Exit a parse tree produced by the {@code PatternTrue}
+	 * labeled alternative in {@link stellaParser#pattern}.
+	 - Parameters:
+	   - ctx: the parse tree
+	 */
+	func exitPatternTrue(_ ctx: stellaParser.PatternTrueContext)
+	/**
+	 * Enter a parse tree produced by the {@code PatternUnit}
+	 * labeled alternative in {@link stellaParser#pattern}.
+	 - Parameters:
+	   - ctx: the parse tree
+	 */
+	func enterPatternUnit(_ ctx: stellaParser.PatternUnitContext)
+	/**
+	 * Exit a parse tree produced by the {@code PatternUnit}
+	 * labeled alternative in {@link stellaParser#pattern}.
+	 - Parameters:
+	   - ctx: the parse tree
+	 */
+	func exitPatternUnit(_ ctx: stellaParser.PatternUnitContext)
+	/**
+	 * Enter a parse tree produced by the {@code PatternInt}
+	 * labeled alternative in {@link stellaParser#pattern}.
+	 - Parameters:
+	   - ctx: the parse tree
+	 */
+	func enterPatternInt(_ ctx: stellaParser.PatternIntContext)
+	/**
+	 * Exit a parse tree produced by the {@code PatternInt}
+	 * labeled alternative in {@link stellaParser#pattern}.
+	 - Parameters:
+	   - ctx: the parse tree
+	 */
+	func exitPatternInt(_ ctx: stellaParser.PatternIntContext)
+	/**
+	 * Enter a parse tree produced by the {@code PatternSucc}
+	 * labeled alternative in {@link stellaParser#pattern}.
+	 - Parameters:
+	   - ctx: the parse tree
+	 */
+	func enterPatternSucc(_ ctx: stellaParser.PatternSuccContext)
+	/**
+	 * Exit a parse tree produced by the {@code PatternSucc}
+	 * labeled alternative in {@link stellaParser#pattern}.
+	 - Parameters:
+	   - ctx: the parse tree
+	 */
+	func exitPatternSucc(_ ctx: stellaParser.PatternSuccContext)
+	/**
+	 * Enter a parse tree produced by the {@code PatternVar}
+	 * labeled alternative in {@link stellaParser#pattern}.
+	 - Parameters:
+	   - ctx: the parse tree
+	 */
+	func enterPatternVar(_ ctx: stellaParser.PatternVarContext)
+	/**
+	 * Exit a parse tree produced by the {@code PatternVar}
+	 * labeled alternative in {@link stellaParser#pattern}.
+	 - Parameters:
+	   - ctx: the parse tree
+	 */
+	func exitPatternVar(_ ctx: stellaParser.PatternVarContext)
+	/**
+	 * Enter a parse tree produced by the {@code ParenthesisedPattern}
+	 * labeled alternative in {@link stellaParser#pattern}.
+	 - Parameters:
+	   - ctx: the parse tree
+	 */
+	func enterParenthesisedPattern(_ ctx: stellaParser.ParenthesisedPatternContext)
+	/**
+	 * Exit a parse tree produced by the {@code ParenthesisedPattern}
+	 * labeled alternative in {@link stellaParser#pattern}.
+	 - Parameters:
+	   - ctx: the parse tree
+	 */
+	func exitParenthesisedPattern(_ ctx: stellaParser.ParenthesisedPatternContext)
+	/**
+	 * Enter a parse tree produced by {@link stellaParser#labelledPattern}.
+	 - Parameters:
+	   - ctx: the parse tree
+	 */
+	func enterLabelledPattern(_ ctx: stellaParser.LabelledPatternContext)
+	/**
+	 * Exit a parse tree produced by {@link stellaParser#labelledPattern}.
+	 - Parameters:
+	   - ctx: the parse tree
+	 */
+	func exitLabelledPattern(_ ctx: stellaParser.LabelledPatternContext)
+	/**
+	 * Enter a parse tree produced by the {@code TypeTuple}
+	 * labeled alternative in {@link stellaParser#stellatype}.
+	 - Parameters:
+	   - ctx: the parse tree
+	 */
+	func enterTypeTuple(_ ctx: stellaParser.TypeTupleContext)
+	/**
+	 * Exit a parse tree produced by the {@code TypeTuple}
+	 * labeled alternative in {@link stellaParser#stellatype}.
+	 - Parameters:
+	   - ctx: the parse tree
+	 */
+	func exitTypeTuple(_ ctx: stellaParser.TypeTupleContext)
+	/**
+	 * Enter a parse tree produced by the {@code TypeVar}
+	 * labeled alternative in {@link stellaParser#stellatype}.
+	 - Parameters:
+	   - ctx: the parse tree
+	 */
+	func enterTypeVar(_ ctx: stellaParser.TypeVarContext)
+	/**
+	 * Exit a parse tree produced by the {@code TypeVar}
+	 * labeled alternative in {@link stellaParser#stellatype}.
+	 - Parameters:
+	   - ctx: the parse tree
+	 */
+	func exitTypeVar(_ ctx: stellaParser.TypeVarContext)
+	/**
+	 * Enter a parse tree produced by the {@code TypeVariant}
+	 * labeled alternative in {@link stellaParser#stellatype}.
+	 - Parameters:
+	   - ctx: the parse tree
+	 */
+	func enterTypeVariant(_ ctx: stellaParser.TypeVariantContext)
+	/**
+	 * Exit a parse tree produced by the {@code TypeVariant}
+	 * labeled alternative in {@link stellaParser#stellatype}.
+	 - Parameters:
+	   - ctx: the parse tree
+	 */
+	func exitTypeVariant(_ ctx: stellaParser.TypeVariantContext)
+	/**
+	 * Enter a parse tree produced by the {@code TypeUnit}
+	 * labeled alternative in {@link stellaParser#stellatype}.
+	 - Parameters:
+	   - ctx: the parse tree
+	 */
+	func enterTypeUnit(_ ctx: stellaParser.TypeUnitContext)
+	/**
+	 * Exit a parse tree produced by the {@code TypeUnit}
+	 * labeled alternative in {@link stellaParser#stellatype}.
+	 - Parameters:
+	   - ctx: the parse tree
+	 */
+	func exitTypeUnit(_ ctx: stellaParser.TypeUnitContext)
 	/**
 	 * Enter a parse tree produced by the {@code TypeBool}
 	 * labeled alternative in {@link stellaParser#stellatype}.
@@ -305,19 +1109,19 @@ public protocol stellaParserListener: ParseTreeListener {
 	 */
 	func exitTypeNat(_ ctx: stellaParser.TypeNatContext)
 	/**
-	 * Enter a parse tree produced by the {@code TypeFun}
+	 * Enter a parse tree produced by the {@code TypeRec}
 	 * labeled alternative in {@link stellaParser#stellatype}.
 	 - Parameters:
 	   - ctx: the parse tree
 	 */
-	func enterTypeFun(_ ctx: stellaParser.TypeFunContext)
+	func enterTypeRec(_ ctx: stellaParser.TypeRecContext)
 	/**
-	 * Exit a parse tree produced by the {@code TypeFun}
+	 * Exit a parse tree produced by the {@code TypeRec}
 	 * labeled alternative in {@link stellaParser#stellatype}.
 	 - Parameters:
 	   - ctx: the parse tree
 	 */
-	func exitTypeFun(_ ctx: stellaParser.TypeFunContext)
+	func exitTypeRec(_ ctx: stellaParser.TypeRecContext)
 	/**
 	 * Enter a parse tree produced by the {@code TypeParens}
 	 * labeled alternative in {@link stellaParser#stellatype}.
@@ -332,4 +1136,84 @@ public protocol stellaParserListener: ParseTreeListener {
 	   - ctx: the parse tree
 	 */
 	func exitTypeParens(_ ctx: stellaParser.TypeParensContext)
+	/**
+	 * Enter a parse tree produced by the {@code TypeFun}
+	 * labeled alternative in {@link stellaParser#stellatype}.
+	 - Parameters:
+	   - ctx: the parse tree
+	 */
+	func enterTypeFun(_ ctx: stellaParser.TypeFunContext)
+	/**
+	 * Exit a parse tree produced by the {@code TypeFun}
+	 * labeled alternative in {@link stellaParser#stellatype}.
+	 - Parameters:
+	   - ctx: the parse tree
+	 */
+	func exitTypeFun(_ ctx: stellaParser.TypeFunContext)
+	/**
+	 * Enter a parse tree produced by the {@code TypeRecord}
+	 * labeled alternative in {@link stellaParser#stellatype}.
+	 - Parameters:
+	   - ctx: the parse tree
+	 */
+	func enterTypeRecord(_ ctx: stellaParser.TypeRecordContext)
+	/**
+	 * Exit a parse tree produced by the {@code TypeRecord}
+	 * labeled alternative in {@link stellaParser#stellatype}.
+	 - Parameters:
+	   - ctx: the parse tree
+	 */
+	func exitTypeRecord(_ ctx: stellaParser.TypeRecordContext)
+	/**
+	 * Enter a parse tree produced by the {@code TypeList}
+	 * labeled alternative in {@link stellaParser#stellatype}.
+	 - Parameters:
+	   - ctx: the parse tree
+	 */
+	func enterTypeList(_ ctx: stellaParser.TypeListContext)
+	/**
+	 * Exit a parse tree produced by the {@code TypeList}
+	 * labeled alternative in {@link stellaParser#stellatype}.
+	 - Parameters:
+	   - ctx: the parse tree
+	 */
+	func exitTypeList(_ ctx: stellaParser.TypeListContext)
+	/**
+	 * Enter a parse tree produced by the {@code TypeSum}
+	 * labeled alternative in {@link stellaParser#stellatype}.
+	 - Parameters:
+	   - ctx: the parse tree
+	 */
+	func enterTypeSum(_ ctx: stellaParser.TypeSumContext)
+	/**
+	 * Exit a parse tree produced by the {@code TypeSum}
+	 * labeled alternative in {@link stellaParser#stellatype}.
+	 - Parameters:
+	   - ctx: the parse tree
+	 */
+	func exitTypeSum(_ ctx: stellaParser.TypeSumContext)
+	/**
+	 * Enter a parse tree produced by {@link stellaParser#recordFieldType}.
+	 - Parameters:
+	   - ctx: the parse tree
+	 */
+	func enterRecordFieldType(_ ctx: stellaParser.RecordFieldTypeContext)
+	/**
+	 * Exit a parse tree produced by {@link stellaParser#recordFieldType}.
+	 - Parameters:
+	   - ctx: the parse tree
+	 */
+	func exitRecordFieldType(_ ctx: stellaParser.RecordFieldTypeContext)
+	/**
+	 * Enter a parse tree produced by {@link stellaParser#variantFieldType}.
+	 - Parameters:
+	   - ctx: the parse tree
+	 */
+	func enterVariantFieldType(_ ctx: stellaParser.VariantFieldTypeContext)
+	/**
+	 * Exit a parse tree produced by {@link stellaParser#variantFieldType}.
+	 - Parameters:
+	   - ctx: the parse tree
+	 */
+	func exitVariantFieldType(_ ctx: stellaParser.VariantFieldTypeContext)
 }

@@ -145,13 +145,65 @@ open class stellaParserBaseListener: stellaParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	open func enterConstTrue(_ ctx: stellaParser.ConstTrueContext) { }
+	open func enterIsEmpty(_ ctx: stellaParser.IsEmptyContext) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	open func exitConstTrue(_ ctx: stellaParser.ConstTrueContext) { }
+	open func exitIsEmpty(_ ctx: stellaParser.IsEmptyContext) { }
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	open func enterFold(_ ctx: stellaParser.FoldContext) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	open func exitFold(_ ctx: stellaParser.FoldContext) { }
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	open func enterAdd(_ ctx: stellaParser.AddContext) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	open func exitAdd(_ ctx: stellaParser.AddContext) { }
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	open func enterIsZero(_ ctx: stellaParser.IsZeroContext) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	open func exitIsZero(_ ctx: stellaParser.IsZeroContext) { }
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	open func enterLessThanOrEqual(_ ctx: stellaParser.LessThanOrEqualContext) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	open func exitLessThanOrEqual(_ ctx: stellaParser.LessThanOrEqualContext) { }
 
 	/**
 	 * {@inheritDoc}
@@ -184,13 +236,299 @@ open class stellaParserBaseListener: stellaParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	open func enterExprParens(_ ctx: stellaParser.ExprParensContext) { }
+	open func enterInl(_ ctx: stellaParser.InlContext) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	open func exitExprParens(_ ctx: stellaParser.ExprParensContext) { }
+	open func exitInl(_ ctx: stellaParser.InlContext) { }
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	open func enterGreaterThanOrEqual(_ ctx: stellaParser.GreaterThanOrEqualContext) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	open func exitGreaterThanOrEqual(_ ctx: stellaParser.GreaterThanOrEqualContext) { }
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	open func enterInr(_ ctx: stellaParser.InrContext) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	open func exitInr(_ ctx: stellaParser.InrContext) { }
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	open func enterDivide(_ ctx: stellaParser.DivideContext) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	open func exitDivide(_ ctx: stellaParser.DivideContext) { }
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	open func enterLessThan(_ ctx: stellaParser.LessThanContext) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	open func exitLessThan(_ ctx: stellaParser.LessThanContext) { }
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	open func enterLogicNot(_ ctx: stellaParser.LogicNotContext) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	open func exitLogicNot(_ ctx: stellaParser.LogicNotContext) { }
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	open func enterDotRecord(_ ctx: stellaParser.DotRecordContext) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	open func exitDotRecord(_ ctx: stellaParser.DotRecordContext) { }
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	open func enterParenthesisedExpr(_ ctx: stellaParser.ParenthesisedExprContext) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	open func exitParenthesisedExpr(_ ctx: stellaParser.ParenthesisedExprContext) { }
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	open func enterGreaterThan(_ ctx: stellaParser.GreaterThanContext) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	open func exitGreaterThan(_ ctx: stellaParser.GreaterThanContext) { }
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	open func enterEqual(_ ctx: stellaParser.EqualContext) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	open func exitEqual(_ ctx: stellaParser.EqualContext) { }
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	open func enterTail(_ ctx: stellaParser.TailContext) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	open func exitTail(_ ctx: stellaParser.TailContext) { }
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	open func enterMultiply(_ ctx: stellaParser.MultiplyContext) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	open func exitMultiply(_ ctx: stellaParser.MultiplyContext) { }
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	open func enterRecord(_ ctx: stellaParser.RecordContext) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	open func exitRecord(_ ctx: stellaParser.RecordContext) { }
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	open func enterList(_ ctx: stellaParser.ListContext) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	open func exitList(_ ctx: stellaParser.ListContext) { }
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	open func enterLogicAnd(_ ctx: stellaParser.LogicAndContext) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	open func exitLogicAnd(_ ctx: stellaParser.LogicAndContext) { }
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	open func enterLogicOr(_ ctx: stellaParser.LogicOrContext) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	open func exitLogicOr(_ ctx: stellaParser.LogicOrContext) { }
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	open func enterHead(_ ctx: stellaParser.HeadContext) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	open func exitHead(_ ctx: stellaParser.HeadContext) { }
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	open func enterTerminatingSemicolon(_ ctx: stellaParser.TerminatingSemicolonContext) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	open func exitTerminatingSemicolon(_ ctx: stellaParser.TerminatingSemicolonContext) { }
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	open func enterNotEqual(_ ctx: stellaParser.NotEqualContext) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	open func exitNotEqual(_ ctx: stellaParser.NotEqualContext) { }
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	open func enterConstUnit(_ ctx: stellaParser.ConstUnitContext) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	open func exitConstUnit(_ ctx: stellaParser.ConstUnitContext) { }
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	open func enterPred(_ ctx: stellaParser.PredContext) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	open func exitPred(_ ctx: stellaParser.PredContext) { }
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	open func enterMatch(_ ctx: stellaParser.MatchContext) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	open func exitMatch(_ ctx: stellaParser.MatchContext) { }
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	open func enterTypeAsc(_ ctx: stellaParser.TypeAscContext) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	open func exitTypeAsc(_ ctx: stellaParser.TypeAscContext) { }
 
 	/**
 	 * {@inheritDoc}
@@ -204,6 +542,19 @@ open class stellaParserBaseListener: stellaParserListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	open func exitNatRec(_ ctx: stellaParser.NatRecContext) { }
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	open func enterSequence(_ ctx: stellaParser.SequenceContext) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	open func exitSequence(_ ctx: stellaParser.SequenceContext) { }
 
 	/**
 	 * {@inheritDoc}
@@ -236,19 +587,6 @@ open class stellaParserBaseListener: stellaParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	open func enterIf(_ ctx: stellaParser.IfContext) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	open func exitIf(_ ctx: stellaParser.IfContext) { }
-
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	open func enterConstInt(_ ctx: stellaParser.ConstIntContext) { }
 	/**
 	 * {@inheritDoc}
@@ -262,6 +600,110 @@ open class stellaParserBaseListener: stellaParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	open func enterUnfold(_ ctx: stellaParser.UnfoldContext) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	open func exitUnfold(_ ctx: stellaParser.UnfoldContext) { }
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	open func enterVariant(_ ctx: stellaParser.VariantContext) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	open func exitVariant(_ ctx: stellaParser.VariantContext) { }
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	open func enterConstTrue(_ ctx: stellaParser.ConstTrueContext) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	open func exitConstTrue(_ ctx: stellaParser.ConstTrueContext) { }
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	open func enterDotTuple(_ ctx: stellaParser.DotTupleContext) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	open func exitDotTuple(_ ctx: stellaParser.DotTupleContext) { }
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	open func enterFix(_ ctx: stellaParser.FixContext) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	open func exitFix(_ ctx: stellaParser.FixContext) { }
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	open func enterSubtract(_ ctx: stellaParser.SubtractContext) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	open func exitSubtract(_ ctx: stellaParser.SubtractContext) { }
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	open func enterLet(_ ctx: stellaParser.LetContext) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	open func exitLet(_ ctx: stellaParser.LetContext) { }
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	open func enterIf(_ ctx: stellaParser.IfContext) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	open func exitIf(_ ctx: stellaParser.IfContext) { }
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	open func enterApplication(_ ctx: stellaParser.ApplicationContext) { }
 	/**
 	 * {@inheritDoc}
@@ -269,6 +711,318 @@ open class stellaParserBaseListener: stellaParserListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	open func exitApplication(_ ctx: stellaParser.ApplicationContext) { }
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	open func enterTuple(_ ctx: stellaParser.TupleContext) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	open func exitTuple(_ ctx: stellaParser.TupleContext) { }
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	open func enterConsList(_ ctx: stellaParser.ConsListContext) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	open func exitConsList(_ ctx: stellaParser.ConsListContext) { }
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	open func enterPatternBinding(_ ctx: stellaParser.PatternBindingContext) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	open func exitPatternBinding(_ ctx: stellaParser.PatternBindingContext) { }
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	open func enterBinding(_ ctx: stellaParser.BindingContext) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	open func exitBinding(_ ctx: stellaParser.BindingContext) { }
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	open func enterMatch_case(_ ctx: stellaParser.Match_caseContext) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	open func exitMatch_case(_ ctx: stellaParser.Match_caseContext) { }
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	open func enterPatternVariant(_ ctx: stellaParser.PatternVariantContext) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	open func exitPatternVariant(_ ctx: stellaParser.PatternVariantContext) { }
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	open func enterPatternInl(_ ctx: stellaParser.PatternInlContext) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	open func exitPatternInl(_ ctx: stellaParser.PatternInlContext) { }
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	open func enterPatternInr(_ ctx: stellaParser.PatternInrContext) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	open func exitPatternInr(_ ctx: stellaParser.PatternInrContext) { }
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	open func enterPatternTuple(_ ctx: stellaParser.PatternTupleContext) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	open func exitPatternTuple(_ ctx: stellaParser.PatternTupleContext) { }
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	open func enterPatternRecord(_ ctx: stellaParser.PatternRecordContext) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	open func exitPatternRecord(_ ctx: stellaParser.PatternRecordContext) { }
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	open func enterPatternList(_ ctx: stellaParser.PatternListContext) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	open func exitPatternList(_ ctx: stellaParser.PatternListContext) { }
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	open func enterPatternCons(_ ctx: stellaParser.PatternConsContext) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	open func exitPatternCons(_ ctx: stellaParser.PatternConsContext) { }
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	open func enterPatternFalse(_ ctx: stellaParser.PatternFalseContext) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	open func exitPatternFalse(_ ctx: stellaParser.PatternFalseContext) { }
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	open func enterPatternTrue(_ ctx: stellaParser.PatternTrueContext) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	open func exitPatternTrue(_ ctx: stellaParser.PatternTrueContext) { }
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	open func enterPatternUnit(_ ctx: stellaParser.PatternUnitContext) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	open func exitPatternUnit(_ ctx: stellaParser.PatternUnitContext) { }
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	open func enterPatternInt(_ ctx: stellaParser.PatternIntContext) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	open func exitPatternInt(_ ctx: stellaParser.PatternIntContext) { }
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	open func enterPatternSucc(_ ctx: stellaParser.PatternSuccContext) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	open func exitPatternSucc(_ ctx: stellaParser.PatternSuccContext) { }
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	open func enterPatternVar(_ ctx: stellaParser.PatternVarContext) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	open func exitPatternVar(_ ctx: stellaParser.PatternVarContext) { }
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	open func enterParenthesisedPattern(_ ctx: stellaParser.ParenthesisedPatternContext) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	open func exitParenthesisedPattern(_ ctx: stellaParser.ParenthesisedPatternContext) { }
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	open func enterLabelledPattern(_ ctx: stellaParser.LabelledPatternContext) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	open func exitLabelledPattern(_ ctx: stellaParser.LabelledPatternContext) { }
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	open func enterTypeTuple(_ ctx: stellaParser.TypeTupleContext) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	open func exitTypeTuple(_ ctx: stellaParser.TypeTupleContext) { }
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	open func enterTypeVar(_ ctx: stellaParser.TypeVarContext) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	open func exitTypeVar(_ ctx: stellaParser.TypeVarContext) { }
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	open func enterTypeVariant(_ ctx: stellaParser.TypeVariantContext) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	open func exitTypeVariant(_ ctx: stellaParser.TypeVariantContext) { }
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	open func enterTypeUnit(_ ctx: stellaParser.TypeUnitContext) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	open func exitTypeUnit(_ ctx: stellaParser.TypeUnitContext) { }
 
 	/**
 	 * {@inheritDoc}
@@ -301,13 +1055,13 @@ open class stellaParserBaseListener: stellaParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	open func enterTypeFun(_ ctx: stellaParser.TypeFunContext) { }
+	open func enterTypeRec(_ ctx: stellaParser.TypeRecContext) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	open func exitTypeFun(_ ctx: stellaParser.TypeFunContext) { }
+	open func exitTypeRec(_ ctx: stellaParser.TypeRecContext) { }
 
 	/**
 	 * {@inheritDoc}
@@ -321,6 +1075,84 @@ open class stellaParserBaseListener: stellaParserListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	open func exitTypeParens(_ ctx: stellaParser.TypeParensContext) { }
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	open func enterTypeFun(_ ctx: stellaParser.TypeFunContext) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	open func exitTypeFun(_ ctx: stellaParser.TypeFunContext) { }
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	open func enterTypeRecord(_ ctx: stellaParser.TypeRecordContext) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	open func exitTypeRecord(_ ctx: stellaParser.TypeRecordContext) { }
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	open func enterTypeList(_ ctx: stellaParser.TypeListContext) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	open func exitTypeList(_ ctx: stellaParser.TypeListContext) { }
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	open func enterTypeSum(_ ctx: stellaParser.TypeSumContext) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	open func exitTypeSum(_ ctx: stellaParser.TypeSumContext) { }
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	open func enterRecordFieldType(_ ctx: stellaParser.RecordFieldTypeContext) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	open func exitRecordFieldType(_ ctx: stellaParser.RecordFieldTypeContext) { }
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	open func enterVariantFieldType(_ ctx: stellaParser.VariantFieldTypeContext) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	open func exitVariantFieldType(_ ctx: stellaParser.VariantFieldTypeContext) { }
 
 	/**
 	 * {@inheritDoc}
