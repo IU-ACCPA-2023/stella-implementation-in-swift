@@ -3,24 +3,25 @@ import Foundation
 
 @main
 public struct stella_implementation_in_swift {
-    public static func typecheck_file(filepath: String) {
+    
+    public static func typecheck_file(filepath: String) throws {
         let lexer = try! stellaLexer(ANTLRInputStream(String(contentsOfFile: filepath)));
-        do {
-            let parser = try stellaParser(CommonTokenStream(lexer))
-            let ctx = try parser.program()
-            let program = try build_program(ctx: ctx)
-            
-            typecheck(program: program)
-        }
-        catch {
-            print(error)
-            print("Parse Error occurred. See the message above.")
-        }
+        
+        let parser = try stellaParser(CommonTokenStream(lexer))
+        let ctx = try parser.program()
+        let program = try build_program(ctx: ctx)
+        
+        try typecheck(program: program)
     }
     
     public static func main() {
-        
         assert(CommandLine.arguments[1] == "typecheck")
-        typecheck_file(filepath: CommandLine.arguments[2])
+        
+        do {
+            try typecheck_file(filepath: CommandLine.arguments[2])
+        } catch {
+            print(error)
+            print("Parse Error occurred. See the message above.")
+        }
     }
 }
