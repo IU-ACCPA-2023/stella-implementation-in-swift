@@ -1537,17 +1537,18 @@ open class stellaParser: Parser {
 		}
 	}
 	public class ParenthesisedExprContext: ExprContext {
+		public var expr_: ExprContext!
 			open
 			func Surrogate_id_SYMB_2() -> TerminalNode? {
 				return getToken(stellaParser.Tokens.Surrogate_id_SYMB_2.rawValue, 0)
 			}
 			open
-			func expr() -> ExprContext? {
-				return getRuleContext(ExprContext.self, 0)
-			}
-			open
 			func Surrogate_id_SYMB_3() -> TerminalNode? {
 				return getToken(stellaParser.Tokens.Surrogate_id_SYMB_3.rawValue, 0)
+			}
+			open
+			func expr() -> ExprContext? {
+				return getRuleContext(ExprContext.self, 0)
 			}
 
 		public
@@ -1895,13 +1896,14 @@ open class stellaParser: Parser {
 		}
 	}
 	public class TerminatingSemicolonContext: ExprContext {
-			open
-			func expr() -> ExprContext? {
-				return getRuleContext(ExprContext.self, 0)
-			}
+		public var expr_: ExprContext!
 			open
 			func Surrogate_id_SYMB_1() -> TerminalNode? {
 				return getToken(stellaParser.Tokens.Surrogate_id_SYMB_1.rawValue, 0)
+			}
+			open
+			func expr() -> ExprContext? {
+				return getRuleContext(ExprContext.self, 0)
 			}
 
 		public
@@ -2157,6 +2159,12 @@ open class stellaParser: Parser {
 		}
 	}
 	public class SequenceContext: ExprContext {
+		public var expr1: ExprContext!
+		public var expr2: ExprContext!
+			open
+			func Surrogate_id_SYMB_1() -> TerminalNode? {
+				return getToken(stellaParser.Tokens.Surrogate_id_SYMB_1.rawValue, 0)
+			}
 			open
 			func expr() -> [ExprContext] {
 				return getRuleContexts(ExprContext.self)
@@ -2164,10 +2172,6 @@ open class stellaParser: Parser {
 			open
 			func expr(_ i: Int) -> ExprContext? {
 				return getRuleContext(ExprContext.self, i)
-			}
-			open
-			func Surrogate_id_SYMB_1() -> TerminalNode? {
-				return getToken(stellaParser.Tokens.Surrogate_id_SYMB_1.rawValue, 0)
 			}
 
 		public
@@ -3489,7 +3493,11 @@ open class stellaParser: Parser {
 				setState(319)
 				try match(stellaParser.Tokens.Surrogate_id_SYMB_2.rawValue)
 				setState(320)
-				try expr(0)
+				try {
+						let assignmentValue = try expr(0)
+						_localctx.castdown(ParenthesisedExprContext.self).expr_ = assignmentValue
+				     }()
+
 				setState(321)
 				try match(stellaParser.Tokens.Surrogate_id_SYMB_3.rawValue)
 
@@ -3697,6 +3705,7 @@ open class stellaParser: Parser {
 						break
 					case 13:
 						_localctx = SequenceContext(  ExprContext(_parentctx, _parentState))
+						(_localctx as! SequenceContext).expr1 = _prevctx
 						try pushNewRecursionContext(_localctx, _startState, stellaParser.RULE_expr)
 						setState(361)
 						if (!(precpred(_ctx, 2))) {
@@ -3705,7 +3714,11 @@ open class stellaParser: Parser {
 						setState(362)
 						try match(stellaParser.Tokens.Surrogate_id_SYMB_1.rawValue)
 						setState(363)
-						try expr(3)
+						try {
+								let assignmentValue = try expr(3)
+								_localctx.castdown(SequenceContext.self).expr2 = assignmentValue
+						     }()
+
 
 						break
 					case 14:
@@ -3811,6 +3824,7 @@ open class stellaParser: Parser {
 						break
 					case 18:
 						_localctx = TerminatingSemicolonContext(  ExprContext(_parentctx, _parentState))
+						(_localctx as! TerminatingSemicolonContext).expr_ = _prevctx
 						try pushNewRecursionContext(_localctx, _startState, stellaParser.RULE_expr)
 						setState(386)
 						if (!(precpred(_ctx, 1))) {
@@ -3974,13 +3988,15 @@ open class stellaParser: Parser {
 	}
 
 	public class Match_caseContext: ParserRuleContext {
-			open
-			func pattern() -> PatternContext? {
-				return getRuleContext(PatternContext.self, 0)
-			}
+		open var pattern_: PatternContext!
+		open var expr_: ExprContext!
 			open
 			func Surrogate_id_SYMB_9() -> TerminalNode? {
 				return getToken(stellaParser.Tokens.Surrogate_id_SYMB_9.rawValue, 0)
+			}
+			open
+			func pattern() -> PatternContext? {
+				return getRuleContext(PatternContext.self, 0)
 			}
 			open
 			func expr() -> ExprContext? {
@@ -4014,11 +4030,19 @@ open class stellaParser: Parser {
 		do {
 		 	try enterOuterAlt(_localctx, 1)
 		 	setState(401)
-		 	try pattern()
+		 	try {
+		 			let assignmentValue = try pattern()
+		 			_localctx.castdown(Match_caseContext.self).pattern_ = assignmentValue
+		 	     }()
+
 		 	setState(402)
 		 	try match(stellaParser.Tokens.Surrogate_id_SYMB_9.rawValue)
 		 	setState(403)
-		 	try expr(0)
+		 	try {
+		 			let assignmentValue = try expr(0)
+		 			_localctx.castdown(Match_caseContext.self).expr_ = assignmentValue
+		 	     }()
+
 
 		}
 		catch ANTLRException.recognition(let re) {
@@ -4222,6 +4246,7 @@ open class stellaParser: Parser {
 	}
 	public class PatternVariantContext: PatternContext {
 		public var label: Token!
+		public var pattern_: PatternContext!
 			open
 			func Surrogate_id_SYMB_11() -> TerminalNode? {
 				return getToken(stellaParser.Tokens.Surrogate_id_SYMB_11.rawValue, 0)
@@ -4287,7 +4312,7 @@ open class stellaParser: Parser {
 		}
 	}
 	public class PatternInrContext: PatternContext {
-		public var pat: PatternContext!
+		public var pattern_: PatternContext!
 			open
 			func Surrogate_id_SYMB_49() -> TerminalNode? {
 				return getToken(stellaParser.Tokens.Surrogate_id_SYMB_49.rawValue, 0)
@@ -4348,7 +4373,7 @@ open class stellaParser: Parser {
 		}
 	}
 	public class PatternInlContext: PatternContext {
-		public var pat: PatternContext!
+		public var pattern_: PatternContext!
 			open
 			func Surrogate_id_SYMB_47() -> TerminalNode? {
 				return getToken(stellaParser.Tokens.Surrogate_id_SYMB_47.rawValue, 0)
@@ -4410,17 +4435,18 @@ open class stellaParser: Parser {
 		}
 	}
 	public class ParenthesisedPatternContext: PatternContext {
+		public var pattern_: PatternContext!
 			open
 			func Surrogate_id_SYMB_2() -> TerminalNode? {
 				return getToken(stellaParser.Tokens.Surrogate_id_SYMB_2.rawValue, 0)
 			}
 			open
-			func pattern() -> PatternContext? {
-				return getRuleContext(PatternContext.self, 0)
-			}
-			open
 			func Surrogate_id_SYMB_3() -> TerminalNode? {
 				return getToken(stellaParser.Tokens.Surrogate_id_SYMB_3.rawValue, 0)
+			}
+			open
+			func pattern() -> PatternContext? {
+				return getRuleContext(PatternContext.self, 0)
 			}
 
 		public
@@ -4442,7 +4468,7 @@ open class stellaParser: Parser {
 		}
 	}
 	public class PatternSuccContext: PatternContext {
-		public var n: PatternContext!
+		public var pattern_: PatternContext!
 			open
 			func Surrogate_id_SYMB_57() -> TerminalNode? {
 				return getToken(stellaParser.Tokens.Surrogate_id_SYMB_57.rawValue, 0)
@@ -4557,7 +4583,11 @@ open class stellaParser: Parser {
 		 			setState(407)
 		 			try match(stellaParser.Tokens.Surrogate_id_SYMB_6.rawValue)
 		 			setState(408)
-		 			try pattern()
+		 			try {
+		 					let assignmentValue = try pattern()
+		 					_localctx.castdown(PatternVariantContext.self).pattern_ = assignmentValue
+		 			     }()
+
 
 		 		}
 
@@ -4575,7 +4605,7 @@ open class stellaParser: Parser {
 		 		setState(414)
 		 		try {
 		 				let assignmentValue = try pattern()
-		 				_localctx.castdown(PatternInlContext.self).pat = assignmentValue
+		 				_localctx.castdown(PatternInlContext.self).pattern_ = assignmentValue
 		 		     }()
 
 		 		setState(415)
@@ -4592,7 +4622,7 @@ open class stellaParser: Parser {
 		 		setState(419)
 		 		try {
 		 				let assignmentValue = try pattern()
-		 				_localctx.castdown(PatternInrContext.self).pat = assignmentValue
+		 				_localctx.castdown(PatternInrContext.self).pattern_ = assignmentValue
 		 		     }()
 
 		 		setState(420)
@@ -4792,7 +4822,7 @@ open class stellaParser: Parser {
 		 		setState(471)
 		 		try {
 		 				let assignmentValue = try pattern()
-		 				_localctx.castdown(PatternSuccContext.self).n = assignmentValue
+		 				_localctx.castdown(PatternSuccContext.self).pattern_ = assignmentValue
 		 		     }()
 
 		 		setState(472)
@@ -4816,7 +4846,11 @@ open class stellaParser: Parser {
 		 		setState(475)
 		 		try match(stellaParser.Tokens.Surrogate_id_SYMB_2.rawValue)
 		 		setState(476)
-		 		try pattern()
+		 		try {
+		 				let assignmentValue = try pattern()
+		 				_localctx.castdown(ParenthesisedPatternContext.self).pattern_ = assignmentValue
+		 		     }()
+
 		 		setState(477)
 		 		try match(stellaParser.Tokens.Surrogate_id_SYMB_3.rawValue)
 
@@ -5126,17 +5160,18 @@ open class stellaParser: Parser {
 		}
 	}
 	public class TypeParensContext: StellatypeContext {
+		public var type_: StellatypeContext!
 			open
 			func Surrogate_id_SYMB_2() -> TerminalNode? {
 				return getToken(stellaParser.Tokens.Surrogate_id_SYMB_2.rawValue, 0)
 			}
 			open
-			func stellatype() -> StellatypeContext? {
-				return getRuleContext(StellatypeContext.self, 0)
-			}
-			open
 			func Surrogate_id_SYMB_3() -> TerminalNode? {
 				return getToken(stellaParser.Tokens.Surrogate_id_SYMB_3.rawValue, 0)
+			}
+			open
+			func stellatype() -> StellatypeContext? {
+				return getRuleContext(StellatypeContext.self, 0)
 			}
 
 		public
@@ -5644,7 +5679,11 @@ open class stellaParser: Parser {
 				setState(553)
 				try match(stellaParser.Tokens.Surrogate_id_SYMB_2.rawValue)
 				setState(554)
-				try stellatype(0)
+				try {
+						let assignmentValue = try stellatype(0)
+						_localctx.castdown(TypeParensContext.self).type_ = assignmentValue
+				     }()
+
 				setState(555)
 				try match(stellaParser.Tokens.Surrogate_id_SYMB_3.rawValue)
 

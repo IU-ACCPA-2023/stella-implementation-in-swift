@@ -86,20 +86,20 @@ expr:
     | 'if' condition = expr 'then' thenExpr = expr 'else' elseExpr = expr # If
     | 'let' patternBindings+=patternBinding (',' patternBindings+=patternBinding)* 'in' body = expr           # Let
     | 'letrec' patternBindings+=patternBinding (',' patternBindings+=patternBinding)* 'in' body = expr           # Let
-    | '(' expr ')'                                                        # ParenthesisedExpr
-    | expr ';' expr # Sequence
-    | expr ';' # TerminatingSemicolon;
+    | '(' expr_ = expr ')'                                                        # ParenthesisedExpr
+    | expr1 = expr ';' expr2 = expr # Sequence
+    | expr_ = expr ';' # TerminatingSemicolon;
 
 patternBinding: pat=pattern '=' rhs=expr ;
 
 binding: name = StellaIdent '=' rhs = expr;
 
-match_case: pattern '=>' expr;
+match_case: pattern_ = pattern '=>' expr_ = expr;
 
 pattern:
-    '<|' label = StellaIdent ('=' pattern)? '|>'                # PatternVariant
-    | 'inl' '(' pat=pattern ')' # PatternInl
-    | 'inr' '(' pat=pattern ')' # PatternInr
+    '<|' label = StellaIdent ('=' pattern_ = pattern)? '|>'                # PatternVariant
+    | 'inl' '(' pattern_ = pattern ')' # PatternInl
+    | 'inr' '(' pattern_ = pattern ')' # PatternInr
     | '{' (patterns += pattern (',' patterns += pattern)*)? '}' # PatternTuple
     | '{' (
         patterns += labelledPattern (
@@ -112,9 +112,9 @@ pattern:
     | 'true'                                                    # PatternTrue
     | 'unit'                                                    # PatternUnit
     | n = INTEGER                                               # PatternInt
-    | 'succ' '(' n = pattern ')'                                # PatternSucc
+    | 'succ' '(' pattern_ = pattern ')'                                # PatternSucc
     | name = StellaIdent                                        # PatternVar
-    | '(' pattern ')'                                           # ParenthesisedPattern;
+    | '(' pattern_ = pattern ')'                                           # ParenthesisedPattern;
 
 labelledPattern: label = StellaIdent '=' pattern;
 
@@ -140,7 +140,7 @@ stellatype:
     | '[' (types += stellatype (',' types += stellatype)*)? ']' # TypeList
     | 'Unit'                                                    # TypeUnit
     | name = StellaIdent                                        # TypeVar
-    | '(' stellatype ')' # TypeParens;
+    | '(' type_ = stellatype ')' # TypeParens;
 
 recordFieldType: label = StellaIdent ':' type_ = stellatype;
 variantFieldType: label = StellaIdent (':' type_ = stellatype)?;
