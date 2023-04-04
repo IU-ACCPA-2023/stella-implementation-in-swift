@@ -9,8 +9,8 @@ public typealias ExtensionName = String
 
 public struct Program {
     var languageDecl: LanguageDecl
-    var extensions: Array<Extension>
-    var decls: Array<Decl>
+    var extensions: [Extension]
+    var decls: [Decl]
 }
 
 public enum LanguageDecl {
@@ -18,17 +18,17 @@ public enum LanguageDecl {
 }
 
 public struct Extension {
-    var extensionNames: Array<ExtensionName>
+    var extensionNames: [ExtensionName]
 }
 
 public enum Decl {
     case declFun(
-        annotations: Array<Annotation>,
+        annotations: [Annotation],
         name: String,
-        paramDecls: Array<ParamDecl>,
+        paramDecls: [ParamDecl],
         returnType: StellaType?,
-        throwsTypes: Array<StellaType>,
-        localDecls: Array<Decl>,
+        throwsTypes: [StellaType],
+        localDecls: [Decl],
         returnExpr: Expr
     )
     case declTypeAlias(
@@ -48,8 +48,8 @@ public struct ParamDecl {
 
 public indirect enum Expr {
     case `if`(expr1: Expr, expr2: Expr, expr3: Expr)
-    case abstraction(paramDecls: Array<ParamDecl>, expr: Expr)
-    case application(expr: Expr, exprs: Array<Expr>)
+    case abstraction(paramDecls: [ParamDecl], expr: Expr)
+    case application(expr: Expr, exprs: [Expr])
     case succ(expr: Expr)
     case natRec(expr1: Expr, expr2: Expr, expr3: Expr)
     case constTrue
@@ -59,9 +59,12 @@ public indirect enum Expr {
 }
 
 public indirect enum StellaType {
-    case fun(parameterTypes: Array<StellaType>, returnType: StellaType)
     case bool
     case nat
+    case unit
+    case fun(parameterTypes: [StellaType], returnType: StellaType)
     case sum(left: StellaType, right: StellaType)
     case tuple(types: [StellaType])
+    case list(types: [StellaType])
+    case `var`(name: String)
 }

@@ -19,24 +19,33 @@ public func build_param_decl(ctx : stellaParser.ParamDeclContext) throws -> Para
 public func build_type(ctx: stellaParser.StellatypeContext) throws -> StellaType {
     switch ctx {
     case is stellaParser.TypeBoolContext:
-            return StellaType.bool
-            
+        return StellaType.bool
+        
     case is stellaParser.TypeNatContext:
-            return StellaType.nat
-            
+        return StellaType.nat
+        
+    case is stellaParser.TypeUnitContext:
+        return StellaType.unit
+        
     case let ctx as stellaParser.TypeFunContext:
-            return try StellaType.fun(parameterTypes: ctx.paramTypes.map(build_type),
-                                      returnType: build_type(ctx: ctx.returnType))
-            
+        return try StellaType.fun(parameterTypes: ctx.paramTypes.map(build_type),
+                                  returnType: build_type(ctx: ctx.returnType))
+        
     case let ctx as stellaParser.TypeParensContext:
-            return try build_type(ctx: ctx.type_)
-          
+        return try build_type(ctx: ctx.type_)
+        
     case let ctx as stellaParser.TypeSumContext:
-            return try StellaType.sum(left: build_type(ctx:ctx.left),
-                                      right: build_type(ctx: ctx.right))
-            
+        return try StellaType.sum(left: build_type(ctx:ctx.left),
+                                  right: build_type(ctx: ctx.right))
+        
     case let ctx as stellaParser.TypeTupleContext:
         return try StellaType.tuple(types: ctx.types.map(build_type))
+        
+    case let ctx as stellaParser.TypeListContext:
+        return try StellaType.list(types: ctx.types.map(build_type))
+    
+    case let ctx as stellaParser.TypeVarContext:
+        return StellaType.var(name: ctx.name.getText()!)
             
     default:
         throw BuildError.UnexpectedParseContext("not a type")
