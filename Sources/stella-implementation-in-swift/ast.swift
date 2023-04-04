@@ -92,7 +92,7 @@ public indirect enum Expr {
     case listTail(list: Expr)
     
     case succ(n: Expr)
-    case not(expr: Expr)
+    case logicNot(expr: Expr)
 
     case natPred(n: Expr)
     case natIsZero(n: Expr)
@@ -127,6 +127,8 @@ public indirect enum Expr {
     case notEqual(left: Expr, right: Expr)
     
     case `if`(condition: Expr, thenExpr: Expr, elseExpr: Expr)
+    
+    case sequence(expr1: Expr, expr2: Expr)
     
 }
     
