@@ -34,12 +34,7 @@ public func build_type(ctx: stellaParser.StellatypeContext) throws -> StellaType
             parameterTypes: ctx.paramTypes.map(build_type),
             returnType: build_type(ctx: ctx.returnType)
         )
-        
-    case let ctx as stellaParser.TypeParensContext:
-        return try build_type(
-            ctx: ctx.type_
-        )
-        
+    
     case let ctx as stellaParser.TypeSumContext:
         return try StellaType.sum(
             left: build_type(ctx:ctx.left),
@@ -53,12 +48,9 @@ public func build_type(ctx: stellaParser.StellatypeContext) throws -> StellaType
         
     case let ctx as stellaParser.TypeListContext:
         return try StellaType.list(
-            types: ctx.types.map(build_type))
-        
-    case let ctx as stellaParser.TypeVarContext:
-        return StellaType.var(
-            name: ctx.name.getText()!
+            types: ctx.types.map(build_type)
         )
+        
         
     case let ctx as stellaParser.TypeRecordContext:
         return StellaType.record(
@@ -74,6 +66,16 @@ public func build_type(ctx: stellaParser.StellatypeContext) throws -> StellaType
                 .init(label: $0.label.getText()!,
                       type: try build_type(ctx: $0.type_))
             }
+        )
+        
+    case let ctx as stellaParser.TypeVarContext:
+        return StellaType.var(
+            name: ctx.name.getText()!
+        )
+        
+    case let ctx as stellaParser.TypeParensContext:
+        return try build_type(
+            ctx: ctx.type_
         )
         
     default:
