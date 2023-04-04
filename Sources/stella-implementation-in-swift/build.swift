@@ -12,21 +12,31 @@ public enum BuildError : Error {
 }
 
 public func build_param_decl(ctx : stellaParser.ParamDeclContext) throws -> ParamDecl {
-    return try ParamDecl(name: ctx.name.getText()!, type: build_type(ctx: ctx.paramType))
+    return try ParamDecl(name: ctx.name.getText()!,
+                         type: build_type(ctx: ctx.paramType))
 }
 
-public func build_type(ctx : stellaParser.StellatypeContext) throws -> StellaType {
+public func build_type(ctx: stellaParser.StellatypeContext) throws -> StellaType {
     switch ctx {
-    case is stellaParser.TypeBoolContext: return StellaType.bool
+    case is stellaParser.TypeBoolContext:
+            return StellaType.bool
             
-    case is stellaParser.TypeNatContext: return StellaType.nat
+    case is stellaParser.TypeNatContext:
+            return StellaType.nat
             
-    case let ctx as stellaParser.TypeFunContext: return try StellaType.fun(
-        parameterTypes: ctx.paramTypes.map(build_type),
-        returnType: build_type(ctx: ctx.returnType)
-    )
+    case let ctx as stellaParser.TypeFunContext:
+            return try StellaType.fun(parameterTypes: ctx.paramTypes.map(build_type),
+                                      returnType: build_type(ctx: ctx.returnType))
             
-    case let ctx as stellaParser.TypeParensContext: return try build_type(ctx: ctx.type_)
+    case let ctx as stellaParser.TypeParensContext:
+            return try build_type(ctx: ctx.type_)
+          
+    case let ctx as stellaParser.TypeSumContext:
+            return try StellaType.sum(left: build_type(ctx:ctx.left),
+                                      right: build_type(ctx: ctx.right))
+            
+    case let ctx as stellaParser.TypeTupleContext:
+        return try StellaType.tuple(types: ctx.types.map(build_type))
             
     default:
         throw BuildError.UnexpectedParseContext("not a type")
@@ -74,7 +84,7 @@ public func build_expr(ctx : stellaParser.ExprContext) throws -> Expr {
         name: ctx.getText()
     )
                                                                 
-    case let ctx as stellaParser.ExprParensContext: return try build_expr(
+    case let ctx as stellaParser.ParenthesisedExprContext: return try build_expr(
         ctx: ctx.expr_
     )
         
@@ -90,7 +100,7 @@ public func build_decl(ctx : stellaParser.DeclContext) throws -> Decl {
         name: ctx.name.getText()!,
         paramDecls: ctx.paramDecls.map(build_param_decl),
         returnType: ctx.returnType.map(build_type),
-        throwsType: ctx.throwType.map(build_type),
+        throwsTypes: ctx.throwTypes.map(build_type),
         localDecls: ctx.localDecls.map(build_decl),
         returnExpr: build_expr(ctx: ctx.returnExpr!)
     )

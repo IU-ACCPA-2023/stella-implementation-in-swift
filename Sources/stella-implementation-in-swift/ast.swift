@@ -27,7 +27,7 @@ public enum Decl {
         name: String,
         paramDecls: Array<ParamDecl>,
         returnType: StellaType?,
-        throwsType: StellaType?,
+        throwsTypes: Array<StellaType>,
         localDecls: Array<Decl>,
         returnExpr: Expr
     )
@@ -62,4 +62,6 @@ public indirect enum StellaType {
     case fun(parameterTypes: Array<StellaType>, returnType: StellaType)
     case bool
     case nat
+    case sum(left: StellaType, right: StellaType)
+    case tuple(types: [StellaType])
 }
