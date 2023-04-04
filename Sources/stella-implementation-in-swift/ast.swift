@@ -66,5 +66,17 @@ public indirect enum StellaType {
     case sum(left: StellaType, right: StellaType)
     case tuple(types: [StellaType])
     case list(types: [StellaType])
+    case record(fieldTypes: [RecordFieldType])
+    case variant(fieldTypes: [VariantFieldType])
     case `var`(name: String)
+}
+
+public struct RecordFieldType {
+    var label: String
+    var type: StellaType
+}
+
+public struct VariantFieldType {
+    var label: String
+    var type: StellaType?
 }

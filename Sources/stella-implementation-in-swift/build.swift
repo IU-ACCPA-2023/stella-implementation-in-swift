@@ -47,6 +47,22 @@ public func build_type(ctx: stellaParser.StellatypeContext) throws -> StellaType
     case let ctx as stellaParser.TypeVarContext:
         return StellaType.var(name: ctx.name.getText()!)
             
+    case let ctx as stellaParser.TypeRecordContext:
+        return StellaType.record(
+            fieldTypes: try ctx.fieldTypes.map{
+                .init(label: $0.label.getText()!,
+                      type: try build_type(ctx: $0.type_))
+            }
+        )
+            
+    case let ctx as stellaParser.TypeVariantContext:
+        return StellaType.record(
+            fieldTypes: try ctx.fieldTypes.map{
+                .init(label: $0.label.getText()!,
+                      type: try build_type(ctx: $0.type_))
+            }
+        )
+            
     default:
         throw BuildError.UnexpectedParseContext("not a type")
     }
