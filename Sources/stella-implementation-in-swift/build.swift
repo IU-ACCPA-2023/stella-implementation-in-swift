@@ -70,48 +70,60 @@ public func build_type(ctx: stellaParser.StellatypeContext) throws -> StellaType
 
 public func build_expr(ctx : stellaParser.ExprContext) throws -> Expr {
     switch ctx {
-    case is stellaParser.ConstFalseContext: return Expr.constFalse
+    case is stellaParser.ConstFalseContext:
+        return Expr.constFalse
             
-    case is stellaParser.ConstTrueContext: return Expr.constTrue
+    case is stellaParser.ConstTrueContext:
+        return Expr.constTrue
             
-    case let ctx as stellaParser.IfContext: return try Expr.if(
-        expr1: build_expr(ctx: ctx.condition),
-        expr2: build_expr(ctx: ctx.thenExpr),
-        expr3: build_expr(ctx: ctx.elseExpr)
-    )
-        
-                                                                
-    case let ctx as stellaParser.ConstIntContext: return Expr.constInt(
-        value: Int(ctx.INTEGER()!.getText())!
-    )
-                                                                
-    case let ctx as stellaParser.SuccContext: return try Expr.succ(
-        expr: build_expr(ctx: ctx.n)
-    )
-                                                                
-    case let ctx as stellaParser.NatRecContext: return try Expr.natRec(
-        expr1: build_expr(ctx: ctx.n),
-        expr2: build_expr(ctx: ctx.initial),
-        expr3: build_expr(ctx: ctx.step)
-    )
-        
-    case let ctx as stellaParser.AbstractionContext: return try Expr.abstraction(
-        paramDecls: ctx.paramDecls.map(build_param_decl),
-        expr: build_expr(ctx: ctx.returnExpr)
-    )
-                                                                
-    case let ctx as stellaParser.ApplicationContext: return try Expr.application(
-        expr: build_expr(ctx: ctx.fun),
-        exprs: ctx.args.map(build_expr)
-    )
-        
-    case let ctx as stellaParser.VarContext: return Expr.var(
-        name: ctx.getText()
-    )
-                                                                
-    case let ctx as stellaParser.ParenthesisedExprContext: return try build_expr(
-        ctx: ctx.expr_
-    )
+    case is stellaParser.ConstUnitContext:
+        return Expr.constUnit
+            
+    case let ctx as stellaParser.IfContext:
+        return try Expr.if(
+            condition: build_expr(ctx: ctx.condition),
+            thenExpr: build_expr(ctx: ctx.thenExpr),
+            elseExpr: build_expr(ctx: ctx.elseExpr)
+        )
+                                
+    case let ctx as stellaParser.ConstIntContext:
+        return Expr.constInt(
+            value: Int(ctx.INTEGER()!.getText())!
+        )
+    
+    case let ctx as stellaParser.SuccContext:
+        return try Expr.succ(
+            n: build_expr(ctx: ctx.n)
+        )
+    
+    case let ctx as stellaParser.NatRecContext:
+        return try Expr.natRec(
+            n: build_expr(ctx: ctx.n),
+            initial: build_expr(ctx: ctx.initial),
+            step: build_expr(ctx: ctx.step)
+        )
+    
+    case let ctx as stellaParser.AbstractionContext:
+        return try Expr.abstraction(
+            paramDecls: ctx.paramDecls.map(build_param_decl),
+            returnExpr: build_expr(ctx: ctx.returnExpr)
+        )
+    
+    case let ctx as stellaParser.ApplicationContext:
+        return try Expr.application(
+            expr: build_expr(ctx: ctx.fun),
+            exprs: ctx.args.map(build_expr)
+        )
+    
+    case let ctx as stellaParser.VarContext:
+        return Expr.var(
+            name: ctx.getText()
+        )
+    
+    case let ctx as stellaParser.ParenthesisedExprContext:
+        return try build_expr(
+            ctx: ctx.expr_
+        )
         
     default:
         throw BuildError.UnexpectedParseContext("not an expr")
@@ -125,7 +137,7 @@ public func build_decl(ctx : stellaParser.DeclContext) throws -> Decl {
         name: ctx.name.getText()!,
         paramDecls: ctx.paramDecls.map(build_param_decl),
         returnType: ctx.returnType.map(build_type),
-        throwsTypes: ctx.throwTypes.map(build_type),
+        throwTypes: ctx.throwTypes.map(build_type),
         localDecls: ctx.localDecls.map(build_decl),
         returnExpr: build_expr(ctx: ctx.returnExpr!)
     )
