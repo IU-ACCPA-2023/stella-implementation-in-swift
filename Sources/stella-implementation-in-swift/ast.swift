@@ -117,6 +117,7 @@ public indirect enum Expr {
     
     case record(bindings: [Binding])
     case variant(label: String, rhs: Expr?)
+    case match(Expr, cases: [MatchCase])
     case list(exprs: [Expr])
     
     case lessThan(left: Expr, right: Expr)
@@ -127,6 +128,8 @@ public indirect enum Expr {
     case notEqual(left: Expr, right: Expr)
     
     case `if`(condition: Expr, thenExpr: Expr, elseExpr: Expr)
+    case `let`(patternBindings: [PatternBinding], body: Expr)
+    case letRec(patternBindings: [PatternBinding], body: Expr)
     
     case sequence(expr1: Expr, expr2: Expr)
     
@@ -134,6 +137,42 @@ public indirect enum Expr {
     
 public struct Binding {
     var name: String
+    var rhs: Expr
+}
+
+
+// MARK: - Pattern
+
+public struct MatchCase {
+    var pattern: Pattern
+    var expr: Expr
+}
+
+public indirect enum Pattern {
+    
+    case variant(label: String, Pattern?)
+    case inl(pat: Pattern)
+    case inr(pat: Pattern)
+    case tuple(patterns: [Pattern])
+    case record(patterns: [LabeledPattern])
+    case list(patterns: [Pattern])
+    case cons(head: Pattern, tail: Pattern)
+    case `true`
+    case `false`
+    case unit
+    case `int`(n: Int)
+    case succ(n: Pattern)
+    case `var`(name: String)
+    
+}
+
+public struct LabeledPattern {
+    var label: String
+    var pattern: Pattern
+}
+
+public struct PatternBinding {
+    var pat: Pattern
     var rhs: Expr
 }
 
