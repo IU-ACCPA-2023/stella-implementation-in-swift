@@ -67,14 +67,12 @@ expr:
         paramDecls += paramDecl (',' paramDecls += paramDecl)*
     )? ')' '{' 'return' returnExpr = expr '}'       # Abstraction
     | '{' (exprs += expr (',' exprs += expr)*)? '}' # Tuple
-    | '{' (
-        bindings += binding (',' bindings += binding)*
-    )? '}'                                            # Record
+    | '{' bindings += binding (',' bindings += binding)* '}' # Record
     | '<|' label = StellaIdent ('=' rhs = expr)? '|>' # Variant
     | 'match' expr '{' (
         cases += match_case ('|' cases += match_case)*
     )? '}'                                         # match
-    | '[' (exprs += expr (',' exprs += expr))? ']' # List
+    | '[' (exprs += expr (',' exprs += expr)*)? ']' # List
     // expr
     | left = expr '<' right = expr  # LessThan
     | left = expr '<=' right = expr # LessThanOrEqual
@@ -126,12 +124,12 @@ stellatype:
     )? ')' '->' returnType = stellatype                        # TypeFun
     | 'µ' var = StellaIdent '.' type_ = stellatype             # TypeRec
     | left = stellatype '+' right = stellatype                 # TypeSum
-    | '{' (types += stellatype (',' types += stellatype))? '}' # TypeTuple
-    | '{' (
+    | '{' (types += stellatype (',' types += stellatype)*)? '}' # TypeTuple
+    | '{'
         fieldTypes += recordFieldType (
             ',' fieldTypes += recordFieldType
         )*
-    )? '}' # TypeRecord
+     '}' # TypeRecord
     | '{' (
         fieldTypes += variantFieldType (
             ',' fieldTypes += variantFieldType
