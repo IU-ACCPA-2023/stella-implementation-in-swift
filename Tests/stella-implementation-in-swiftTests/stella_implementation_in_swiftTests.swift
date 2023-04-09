@@ -5,21 +5,29 @@ final class stella_implementation_in_swiftTests: XCTestCase {
         
     // MARK: - Tests
     
-    func testWellTyped() throws {
+    func testCoreWellTyped() throws {
         let resourcePath = "\(Bundle.module.resourcePath!)/Resources"
         let filepaths = filepaths(in: resourcePath + "/well-typed")
-        
+        checkWellTyped(filepaths: filepaths)
+    }
+
+    func testCoreIllTyped() throws {
+        let resourcePath = "\(Bundle.module.resourcePath!)/Resources"
+        let filepaths = filepaths(in: resourcePath + "/ill-typed")
+        checkIllTyped(filepaths: filepaths)
+    }
+    
+    // MARK: - Private Helpers
+    
+    private func checkWellTyped(filepaths: [String]) {
         for filepath in filepaths {
             print("Typechecking file <\(filepath.split(separator: "/").last!)>")
             XCTAssertNoThrow(try stella_implementation_in_swift.typecheck_file(filepath: filepath))
             print()
         }
     }
-
-    func testIllTyped() throws {
-        let resourcePath = "\(Bundle.module.resourcePath!)/Resources"
-        let filepaths = filepaths(in: resourcePath + "/ill-typed")
-        
+    
+    private func checkIllTyped(filepaths: [String]) {
         for filepath in filepaths {
             print("Typechecking file <\(filepath.split(separator: "/").last!)>")
             XCTAssertThrowsError(
