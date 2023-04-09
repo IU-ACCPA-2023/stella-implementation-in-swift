@@ -51,7 +51,6 @@ public func build_type(ctx: stellaParser.StellatypeContext) throws -> StellaType
             types: ctx.types.map(build_type)
         )
         
-        
     case let ctx as stellaParser.TypeRecordContext:
         return StellaType.record(
             fieldTypes: try ctx.fieldTypes.map{
@@ -269,6 +268,13 @@ public func build_expr(ctx: stellaParser.ExprContext) throws -> Expr {
             rhs: build_expr(ctx: ctx.rhs)
         )
         
+    case let ctx as stellaParser.MatchContext:
+        return try Expr.match(
+            build_expr(ctx: ctx.expr()!),
+            cases: ctx.cases.map { .init(pattern: try buildPattern(ctx: $0.pattern_),
+                                         expr: try build_expr(ctx: $0.expr_)) }
+        )
+        
     case let ctx as stellaParser.ListContext:
         return try Expr.list(
             exprs: ctx.exprs.map(build_expr)
@@ -316,7 +322,22 @@ public func build_expr(ctx: stellaParser.ExprContext) throws -> Expr {
             thenExpr: build_expr(ctx: ctx.thenExpr),
             elseExpr: build_expr(ctx: ctx.elseExpr)
         )
-  
+                            
+    case let ctx as stellaParser.LetContext:
+        return try Expr.let(
+            patternBindings: ctx.patternBindings.map { .init(pat: try buildPattern(ctx: $0.pat),
+                                                             rhs: try build_expr(ctx: $0.rhs)) },
+            body: build_expr(ctx: ctx.body)
+        )
+    
+    // MARK: - There are no LetRecContext
+//    case let ctx as stellaParser.Context:
+//        return try Expr.letRec(
+//            patternBindings: ctx.patternBindings.map { .init(pat: try buildPattern(ctx: $0.pat),
+//                                                             rhs: try build_expr(ctx: $0.rhs)) },
+//            body: build_expr(ctx: ctx.body)
+//        )
+
     case let ctx as stellaParser.SequenceContext:
         return try Expr.sequence(
             expr1: build_expr(ctx: ctx.expr1),
@@ -335,6 +356,56 @@ public func build_expr(ctx: stellaParser.ExprContext) throws -> Expr {
     
     default:
         throw BuildError.UnexpectedParseContext("not an expr")
+    }
+}
+
+public func buildPattern(ctx: stellaParser.PatternContext) throws -> Pattern {
+    switch ctx {
+    case let ctx as stellaParser.PatternVariantContext:
+        return try .variant(label: ctx.label.getText()!, buildPattern(ctx: ctx.pattern_))
+        
+    case let ctx as stellaParser.PatternInlContext:
+        return try .inl(pat: buildPattern(ctx: ctx.pattern_))
+        
+    case let ctx as stellaParser.PatternInrContext:
+        return try .inl(pat: buildPattern(ctx: ctx.pattern_))
+        
+    case let ctx as stellaParser.PatternTupleContext:
+        return .tuple(patterns: try ctx.patterns.map(buildPattern))
+        
+    // MARK: No pattern in LabelledPatternContext
+    case let ctx as stellaParser.PatternRecordContext:
+        return .record(patterns: ctx.patterns.map{ .init(label: $0.label.getText()!, pattern: nil) })
+        
+    case let ctx as stellaParser.PatternListContext:
+        return .list(patterns: try ctx.patterns.map(buildPattern))
+    
+    case let ctx as stellaParser.PatternConsContext:
+        return try .cons(head: buildPattern(ctx: ctx.head), tail: buildPattern(ctx: ctx.tail))
+    
+    case is stellaParser.PatternTrueContext:
+        return .true
+        
+    case is stellaParser.PatternFalseContext:
+        return .false
+        
+    case is stellaParser.PatternUnitContext:
+        return .unit
+        
+    case let ctx as stellaParser.PatternIntContext:
+        return .int(n: Int(ctx.n.getText()!)!)
+        
+    case let ctx as stellaParser.PatternSuccContext:
+        return try .succ(n: buildPattern(ctx: ctx.pattern_))
+        
+    case let ctx as stellaParser.PatternVarContext:
+        return .var(name: ctx.name.getText()!)
+        
+    case let ctx as stellaParser.ParenthesisedPatternContext:
+        return try buildPattern(ctx: ctx.pattern_)
+        
+    default:
+        throw BuildError.UnexpectedParseContext("not a pattern")
     }
 }
 

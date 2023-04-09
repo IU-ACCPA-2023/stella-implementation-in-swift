@@ -69,9 +69,6 @@ public struct ParamDecl {
 
 // MARK: - Expressions
 
-// TODO: - Murashko Artem 04.04.2023
-// Implement match, let, letrec
-
 public indirect enum Expr {
     
     case dotRecord(expr: Expr, label: String)
@@ -143,11 +140,6 @@ public struct Binding {
 
 // MARK: - Pattern
 
-public struct MatchCase {
-    var pattern: Pattern
-    var expr: Expr
-}
-
 public indirect enum Pattern {
     
     case variant(label: String, Pattern?)
@@ -166,9 +158,14 @@ public indirect enum Pattern {
     
 }
 
+public struct MatchCase {
+    var pattern: Pattern
+    var expr: Expr
+}
+
 public struct LabeledPattern {
     var label: String
-    var pattern: Pattern
+    var pattern: Pattern?
 }
 
 public struct PatternBinding {
