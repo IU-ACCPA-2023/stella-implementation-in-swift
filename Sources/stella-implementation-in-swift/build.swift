@@ -368,7 +368,7 @@ public func buildPattern(ctx: stellaParser.PatternContext) throws -> Pattern {
         return try .inl(pat: buildPattern(ctx: ctx.pattern_))
         
     case let ctx as stellaParser.PatternInrContext:
-        return try .inl(pat: buildPattern(ctx: ctx.pattern_))
+        return try .inr(pat: buildPattern(ctx: ctx.pattern_))
         
     case let ctx as stellaParser.PatternTupleContext:
         return .tuple(patterns: try ctx.patterns.map(buildPattern))

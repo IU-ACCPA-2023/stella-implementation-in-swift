@@ -24,4 +24,5 @@ public struct stella_implementation_in_swift {
             print("Parse Error occurred. See the message above.")
         }
     }
+    
 }
