@@ -21,38 +21,38 @@ public func buildParamDecl(ctx: stellaParser.ParamDeclContext) throws -> ParamDe
 public func buildType(ctx: stellaParser.StellatypeContext) throws -> StellaType {
     switch ctx {
     case is stellaParser.TypeBoolContext:
-        return StellaType.bool
+        return .bool
         
     case is stellaParser.TypeNatContext:
-        return StellaType.nat
+        return .nat
         
     case is stellaParser.TypeUnitContext:
-        return StellaType.unit
+        return .unit
         
     case let ctx as stellaParser.TypeFunContext:
-        return try StellaType.fun(
+        return try .fun(
             parameterTypes: ctx.paramTypes.map(buildType),
             returnType: buildType(ctx: ctx.returnType)
         )
     
     case let ctx as stellaParser.TypeSumContext:
-        return try StellaType.sum(
+        return try .sum(
             left: buildType(ctx:ctx.left),
             right: buildType(ctx: ctx.right)
         )
         
     case let ctx as stellaParser.TypeTupleContext:
-        return try StellaType.tuple(
+        return try .tuple(
             types: ctx.types.map(buildType)
         )
         
     case let ctx as stellaParser.TypeListContext:
-        return try StellaType.list(
+        return try .list(
             types: ctx.types.map(buildType)
         )
         
     case let ctx as stellaParser.TypeRecordContext:
-        return StellaType.record(
+        return .record(
             fieldTypes: try ctx.fieldTypes.map{
                 .init(label: $0.label.getText()!,
                       type: try buildType(ctx: $0.type_))
@@ -60,7 +60,7 @@ public func buildType(ctx: stellaParser.StellatypeContext) throws -> StellaType 
         )
         
     case let ctx as stellaParser.TypeVariantContext:
-        return StellaType.record(
+        return .record(
             fieldTypes: try ctx.fieldTypes.map{
                 .init(label: $0.label.getText()!,
                       type: try buildType(ctx: $0.type_))
@@ -68,7 +68,7 @@ public func buildType(ctx: stellaParser.StellatypeContext) throws -> StellaType 
         )
         
     case let ctx as stellaParser.TypeVarContext:
-        return StellaType.var(
+        return .var(
             name: ctx.name.getText()!
         )
         
@@ -97,235 +97,235 @@ public func buildExpr(ctx: stellaParser.ExprContext) throws -> Expr {
         )
         
     case is stellaParser.ConstTrueContext:
-        return Expr.constTrue
+        return .constTrue
         
     case is stellaParser.ConstFalseContext:
-        return Expr.constFalse
+        return .constFalse
         
     case is stellaParser.ConstUnitContext:
-        return Expr.constUnit
+        return .constUnit
     
     case let ctx as stellaParser.ConstIntContext:
-        return Expr.constInt(
+        return .constInt(
             value: Int(ctx.INTEGER()!.getText())!
         )
         
     case let ctx as stellaParser.VarContext:
-        return Expr.var(
+        return .var(
             name: ctx.name.getText()!
         )
         
     case let ctx as stellaParser.InlContext:
-        return try Expr.inl(
+        return try .inl(
             expr: buildExpr(ctx: ctx.expr_)
         )
         
     case let ctx as stellaParser.InrContext:
-        return try Expr.inr(
+        return try .inr(
             expr: buildExpr(ctx: ctx.expr_)
         )
         
     case let ctx as stellaParser.ConsListContext:
-        return try Expr.listCons(
+        return try .listCons(
             head: buildExpr(ctx: ctx.head),
             tail: buildExpr(ctx: ctx.tail)
         )
         
     case let ctx as stellaParser.HeadContext:
-        return try Expr.listHead(
+        return try .listHead(
             list: buildExpr(ctx: ctx.list)
         )
     
     case let ctx as stellaParser.IsEmptyContext:
-        return try Expr.listIsEmpty(
+        return try .listIsEmpty(
             list: buildExpr(ctx: ctx.list)
         )
         
     case let ctx as stellaParser.TailContext:
-        return try Expr.listTail(
+        return try .listTail(
             list: buildExpr(ctx: ctx.list)
         )
         
     case let ctx as stellaParser.SuccContext:
-        return try Expr.succ(
+        return try .succ(
             n: buildExpr(ctx: ctx.n)
         )
         
     case let ctx as stellaParser.LogicNotContext:
-        return try Expr.logicNot(
+        return try .logicNot(
             expr: buildExpr(ctx: ctx.expr_)
         )
         
     case let ctx as stellaParser.PredContext:
-        return try Expr.natPred(
+        return try .natPred(
             n: buildExpr(ctx: ctx.n)
         )
     
     case let ctx as stellaParser.IsZeroContext:
-        return try Expr.natIsZero(
+        return try .natIsZero(
             n: buildExpr(ctx: ctx.n)
         )
         
     case let ctx as stellaParser.NatRecContext:
-        return try Expr.natRec(
+        return try .natRec(
             n: buildExpr(ctx: ctx.n),
             initial: buildExpr(ctx: ctx.initial),
             step: buildExpr(ctx: ctx.step)
         )
         
     case let ctx as stellaParser.FixContext:
-        return try Expr.fix(
+        return try .fix(
             expr: buildExpr(ctx: ctx.expr_)
         )
     
     case let ctx as stellaParser.FoldContext:
-        return try Expr.fold(
+        return try .fold(
             type: buildType(ctx: ctx.type_),
             expr: buildExpr(ctx: ctx.expr_)
         )
         
     case let ctx as stellaParser.UnfoldContext:
-        return try Expr.unfold(
+        return try .unfold(
             type: buildType(ctx: ctx.type_),
             expr: buildExpr(ctx: ctx.expr_)
         )
     
     case let ctx as stellaParser.ApplicationContext:
-        return try Expr.application(
+        return try .application(
             expr: buildExpr(ctx: ctx.fun),
             exprs: ctx.args.map(buildExpr)
         )
         
     case let ctx as stellaParser.MultiplyContext:
-        return try Expr.multiply(
+        return try .multiply(
             left: buildExpr(ctx: ctx.left),
             right: buildExpr(ctx: ctx.right)
         )
         
     case let ctx as stellaParser.DivideContext:
-        return try Expr.divide(
+        return try .divide(
             left: buildExpr(ctx: ctx.left),
             right: buildExpr(ctx: ctx.right)
         )
         
     case let ctx as stellaParser.LogicAndContext:
-        return try Expr.logicAnd(
+        return try .logicAnd(
             left: buildExpr(ctx: ctx.left),
             right: buildExpr(ctx: ctx.right)
         )
         
     case let ctx as stellaParser.AddContext:
-        return try Expr.add(
+        return try .add(
             left: buildExpr(ctx: ctx.left),
             right: buildExpr(ctx: ctx.right)
         )
         
     case let ctx as stellaParser.SubtractContext:
-        return try Expr.subtract(
+        return try .subtract(
             left: buildExpr(ctx: ctx.left),
             right: buildExpr(ctx: ctx.right)
         )
         
     case let ctx as stellaParser.LogicOrContext:
-        return try Expr.logicOr(
+        return try .logicOr(
             left: buildExpr(ctx: ctx.left),
             right: buildExpr(ctx: ctx.right)
         )
         
     case let ctx as stellaParser.TypeAscContext:
-        return try Expr.typeAsc(
+        return try .typeAsc(
             expr: buildExpr(ctx: ctx.expr_),
             type: buildType(ctx: ctx.type_)
         )
         
     case let ctx as stellaParser.AbstractionContext:
-        return try Expr.abstraction(
+        return try .abstraction(
             paramDecls: ctx.paramDecls.map(buildParamDecl),
             returnExpr: buildExpr(ctx: ctx.returnExpr)
         )
         
     case let ctx as stellaParser.TupleContext:
-        return try Expr.tuple(
+        return try .tuple(
             exprs: ctx.exprs.map(buildExpr)
         )
         
     case let ctx as stellaParser.RecordContext:
-        return Expr.record(
+        return .record(
             bindings: try ctx.bindings.map {
                 .init(name: $0.name.getText()!, rhs: try buildExpr(ctx: $0.rhs))
             }
         )
         
     case let ctx as stellaParser.VariantContext:
-        return try Expr.variant(
+        return try .variant(
             label: ctx.label.getText()!,
             rhs: buildExpr(ctx: ctx.rhs)
         )
         
     case let ctx as stellaParser.MatchContext:
-        return try Expr.match(
+        return try .match(
             buildExpr(ctx: ctx.expr()!),
             cases: ctx.cases.map { .init(pattern: try buildPattern(ctx: $0.pattern_),
                                          expr: try buildExpr(ctx: $0.expr_)) }
         )
         
     case let ctx as stellaParser.ListContext:
-        return try Expr.list(
+        return try .list(
             exprs: ctx.exprs.map(buildExpr)
         )
         
     case let ctx as stellaParser.LessThanContext:
-        return try Expr.lessThan(
+        return try .lessThan(
             left: buildExpr(ctx: ctx.left),
             right: buildExpr(ctx: ctx.right)
         )
     
     case let ctx as stellaParser.LessThanOrEqualContext:
-        return try Expr.lessThanOrEqual(
+        return try .lessThanOrEqual(
             left: buildExpr(ctx: ctx.left),
             right: buildExpr(ctx: ctx.right)
         )
         
     case let ctx as stellaParser.GreaterThanContext:
-        return try Expr.greaterThan(
+        return try .greaterThan(
             left: buildExpr(ctx: ctx.left),
             right: buildExpr(ctx: ctx.right)
         )
         
     case let ctx as stellaParser.GreaterThanOrEqualContext:
-        return try Expr.greaterThanOrEqual(
+        return try .greaterThanOrEqual(
             left: buildExpr(ctx: ctx.left),
             right: buildExpr(ctx: ctx.right)
         )
         
     case let ctx as stellaParser.EqualContext:
-        return try Expr.equal(
+        return try .equal(
             left: buildExpr(ctx: ctx.left),
             right: buildExpr(ctx: ctx.right)
         )
         
     case let ctx as stellaParser.NotEqualContext:
-        return try Expr.notEqual(
+        return try .notEqual(
             left: buildExpr(ctx: ctx.left),
             right: buildExpr(ctx: ctx.right)
         )
                                 
     case let ctx as stellaParser.IfContext:
-        return try Expr.if(
+        return try .if(
             condition: buildExpr(ctx: ctx.condition),
             thenExpr: buildExpr(ctx: ctx.thenExpr),
             elseExpr: buildExpr(ctx: ctx.elseExpr)
         )
                             
     case let ctx as stellaParser.LetContext:
-        return try Expr.let(
+        return try .let(
             patternBindings: ctx.patternBindings.map { .init(pat: try buildPattern(ctx: $0.pat),
                                                              rhs: try buildExpr(ctx: $0.rhs)) },
             body: buildExpr(ctx: ctx.body)
         )
     
     case let ctx as stellaParser.LetRecContext:
-        return try Expr.letRec(
+        return try .letRec(
             patternBindings: ctx.patternBindings.map { .init(pat: try buildPattern(ctx: $0.pat),
                                                              rhs: try buildExpr(ctx: $0.rhs)) },
             body: buildExpr(ctx: ctx.body)
@@ -407,7 +407,7 @@ public func buildPattern(ctx: stellaParser.PatternContext) throws -> Pattern {
 public func buildDecl(ctx: stellaParser.DeclContext) throws -> Decl {
     switch ctx {
     case let ctx as stellaParser.DeclFunContext:
-        return try Decl.declFun(
+        return try .declFun(
             annotations: Array(), // TODO: annotations
             name: ctx.name.getText()!,
             paramDecls: ctx.paramDecls.map(buildParamDecl),
@@ -418,7 +418,7 @@ public func buildDecl(ctx: stellaParser.DeclContext) throws -> Decl {
         )
         
     case let ctx as stellaParser.DeclTypeAliasContext:
-        return try Decl.declTypeAlias(
+        return try .declTypeAlias(
             name: ctx.name.getText()!,
             type: buildType(ctx: ctx.atype!)
         )
