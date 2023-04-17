@@ -128,7 +128,7 @@ public indirect enum Expr {
     case `let`(patternBindings: [PatternBinding], body: Expr)
     case letRec(patternBindings: [PatternBinding], body: Expr)
     
-    case sequence(expr1: Expr, expr2: Expr)
+    case sequence(expr1: Expr, expr2: Expr?)
     
 }
     
@@ -165,7 +165,7 @@ public struct MatchCase {
 
 public struct LabeledPattern {
     var label: String
-    var pattern: Pattern?
+    var pattern: Pattern
 }
 
 public struct PatternBinding {
