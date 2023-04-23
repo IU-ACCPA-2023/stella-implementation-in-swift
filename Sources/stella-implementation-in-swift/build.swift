@@ -113,9 +113,12 @@ public func buildExpr(ctx: stellaParser.ExprContext) throws -> Expr {
         return .constInt(
             value: Int(ctx.INTEGER()!.getText())!
         )
-    
-    case is stellaParser.ConstMemoryContext:
-        fatalError("mem not implemented yet")
+        
+    case let ctx as stellaParser.ConstMemoryContext:
+        #warning("TODO: Check, may be wrong")
+        return .constMemory(
+            mem: ctx.mem.getText()!
+        )
         
     case let ctx as stellaParser.VarContext:
         return .var(

@@ -78,7 +78,7 @@ public indirect enum Expr {
     case constFalse
     case constUnit
     case constInt(value: Int)
-    case constMemory(mem: UnsafeMutablePointer<StellaType>)
+    case constMemory(mem: String)
     case `var`(name: String)
     
     case panic
