@@ -1,10 +1,3 @@
-//
-//  build.swift
-//  
-//
-//  Created by Nikolai Kudasov on 27.03.2023.
-//
-
 import Antlr4
 
 public enum BuildError: Error {
@@ -37,7 +30,7 @@ public func buildType(ctx: stellaParser.StellatypeContext) throws -> StellaType 
     
     case let ctx as stellaParser.TypeSumContext:
         return try .sum(
-            left: buildType(ctx:ctx.left),
+            left: buildType(ctx: ctx.left),
             right: buildType(ctx: ctx.right)
         )
         
@@ -52,20 +45,31 @@ public func buildType(ctx: stellaParser.StellatypeContext) throws -> StellaType 
         )
         
     case let ctx as stellaParser.TypeRecordContext:
-        return .record(
-            fieldTypes: try ctx.fieldTypes.map{
+        return try .record(
+            fieldTypes: ctx.fieldTypes.map{
                 .init(label: $0.label.getText()!,
                       type: try buildType(ctx: $0.type_))
             }
         )
         
     case let ctx as stellaParser.TypeVariantContext:
-        return .record(
-            fieldTypes: try ctx.fieldTypes.map{
+        return try .record(
+            fieldTypes: ctx.fieldTypes.map{
                 .init(label: $0.label.getText()!,
                       type: try buildType(ctx: $0.type_))
             }
         )
+        
+    case is stellaParser.TypeTopContext:
+        return .top
+     
+    case let ctx as stellaParser.TypeRefContext:
+        return try .ref(
+            type: buildType(ctx: ctx.type_)
+        )
+        
+    case is stellaParser.TypeBottomContext:
+        return .bot
         
     case let ctx as stellaParser.TypeVarContext:
         return .var(
@@ -109,10 +113,34 @@ public func buildExpr(ctx: stellaParser.ExprContext) throws -> Expr {
         return .constInt(
             value: Int(ctx.INTEGER()!.getText())!
         )
+    
+    case is stellaParser.ConstMemoryContext:
+        fatalError("mem not implemented yet")
         
     case let ctx as stellaParser.VarContext:
         return .var(
             name: ctx.name.getText()!
+        )
+        
+    case is stellaParser.PanicContext:
+        return .panic
+        
+    case let ctx as stellaParser.ThrowContext:
+        return try .throw(
+            expr: buildExpr(ctx: ctx.expr_)
+        )
+        
+    case let ctx as stellaParser.TryCatchContext:
+        return try .tryCatch(
+            tryExpr: buildExpr(ctx: ctx.tryExpr),
+            pat: buildPattern(ctx: ctx.pat),
+            fallbackExpr: buildExpr(ctx: ctx.fallbackExpr)
+        )
+        
+    case let ctx as stellaParser.TryWithContext:
+        return try .tryWith(
+            tryExpr: buildExpr(ctx: ctx.tryExpr),
+            fallbackExpr: buildExpr(ctx: ctx.fallbackExpr)
         )
         
     case let ctx as stellaParser.InlContext:
@@ -232,8 +260,24 @@ public func buildExpr(ctx: stellaParser.ExprContext) throws -> Expr {
             right: buildExpr(ctx: ctx.right)
         )
         
+    case let ctx as stellaParser.RefContext:
+        return try .ref(
+            expr: buildExpr(ctx: ctx.expr_)
+        )
+        
+    case let ctx as stellaParser.DerefContext:
+        return try .deref(
+            expr: buildExpr(ctx: ctx.expr_)
+        )
+        
     case let ctx as stellaParser.TypeAscContext:
         return try .typeAsc(
+            expr: buildExpr(ctx: ctx.expr_),
+            type: buildType(ctx: ctx.type_)
+        )
+        
+    case let ctx as stellaParser.TypeCastContext:
+        return try .typeCast(
             expr: buildExpr(ctx: ctx.expr_),
             type: buildType(ctx: ctx.type_)
         )
@@ -309,6 +353,12 @@ public func buildExpr(ctx: stellaParser.ExprContext) throws -> Expr {
             left: buildExpr(ctx: ctx.left),
             right: buildExpr(ctx: ctx.right)
         )
+        
+    case let ctx as stellaParser.AssignContext:
+        return try .assign(
+            lhs: buildExpr(ctx: ctx.lhs),
+            rhs: buildExpr(ctx: ctx.rhs)
+        )
                                 
     case let ctx as stellaParser.IfContext:
         return try .if(
@@ -332,18 +382,10 @@ public func buildExpr(ctx: stellaParser.ExprContext) throws -> Expr {
         )
 
     case let ctx as stellaParser.SequenceContext:
-        if ctx.expr2 != nil {
-            return try .sequence(
-                expr1: buildExpr(ctx: ctx.expr1),
-                expr2: buildExpr(ctx: ctx.expr2)
-            )
-        }
-        else {
-            return try .sequence(
-                expr1: buildExpr(ctx: ctx.expr1),
-                expr2: nil
-            )
-        }
+        return try .sequence(
+            expr1: buildExpr(ctx: ctx.expr1),
+            expr2: ctx.expr2 != nil ? buildExpr(ctx: ctx.expr2) : nil
+        )
                             
     case let ctx as stellaParser.ParenthesisedExprContext:
         return try buildExpr(
@@ -408,7 +450,7 @@ public func buildDecl(ctx: stellaParser.DeclContext) throws -> Decl {
     switch ctx {
     case let ctx as stellaParser.DeclFunContext:
         return try .declFun(
-            annotations: Array(), // TODO: annotations
+            annotations: [], // TODO: annotations
             name: ctx.name.getText()!,
             paramDecls: ctx.paramDecls.map(buildParamDecl),
             returnType: ctx.returnType.map(buildType),
@@ -423,17 +465,26 @@ public func buildDecl(ctx: stellaParser.DeclContext) throws -> Decl {
             type: buildType(ctx: ctx.atype!)
         )
         
+    case let ctx as stellaParser.DeclExceptionTypeContext:
+        return try .declExceptionType(
+            exceptionType: buildType(ctx: ctx.exceptionType)
+        )
+        
+    case let ctx as stellaParser.DeclExceptionVariantContext:
+        return try .declExceptionVariant(
+            name: ctx.name.getText()!,
+            variantType: buildType(ctx: ctx.variantType)
+        )
+        
     default:
         throw BuildError.UnexpectedParseContext("not a declaration")
     }
 }
 
 public func buildProgram(ctx: stellaParser.ProgramContext) throws -> Program {
-    // TODO: ctx.languageDecl()
-    // TODO: ctx.extensions
     return try Program(
-        languageDecl: LanguageDecl.languageCore,
-        extensions: Array(),
+        languageDecl: .languageCore, // TODO: ctx.languageDecl()
+        extensions: [], // TODO: ctx.extensions
         decls: ctx.decls.map(buildDecl)
     )
 }

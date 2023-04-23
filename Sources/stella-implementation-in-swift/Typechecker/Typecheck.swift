@@ -7,12 +7,17 @@
 
 public func typecheck(decl: Decl) {
     switch decl {
-    case .declFun(_, let name, _, _, _, _, _):
-        print("Declaring function " + name)
-        return
+    case let .declFun(_, name, _, _, _, _, _):
+        print("decl function, name = \(name)")
             
-    case .declTypeAlias(_, _):
-        return
+    case let .declTypeAlias(name, _):
+        print("decl type alias, name = \(name)")
+        
+    case .declExceptionType:
+        print("decl exception type")
+        
+    case let .declExceptionVariant(name, _):
+        print("decl exception variant, name = \(name)")
     }
 }
 

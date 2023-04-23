@@ -1,12 +1,3 @@
-//
-//  ast.swift
-//  
-//
-//  Created by Nikolai Kudasov on 27.03.2023.
-//
-
-public typealias ExtensionName = String
-
 // MARK: - Program
 
 public struct Program {
@@ -29,7 +20,7 @@ public enum LanguageDecl {
 
 public struct Extension {
     
-    var extensionNames: [ExtensionName]
+    var extensionNames: [String]
     
 }
 
@@ -50,6 +41,15 @@ public enum Decl {
     case declTypeAlias(
         name: String,
         type: StellaType
+    )
+    
+    case declExceptionType(
+        exceptionType: StellaType
+    )
+    
+    case declExceptionVariant(
+        name: String,
+        variantType: StellaType
     )
     
 }
@@ -78,8 +78,13 @@ public indirect enum Expr {
     case constFalse
     case constUnit
     case constInt(value: Int)
+    case constMemory(mem: UnsafeMutablePointer<StellaType>)
     case `var`(name: String)
     
+    case panic
+    case `throw`(expr: Expr)
+    case tryCatch(tryExpr: Expr, pat: Pattern, fallbackExpr: Expr)
+    case tryWith(tryExpr: Expr, fallbackExpr: Expr)
     case inl(expr: Expr)
     case inr(expr: Expr)
 
@@ -108,7 +113,12 @@ public indirect enum Expr {
     case subtract(left: Expr, right: Expr)
     case logicOr(left: Expr, right: Expr)
     
-    case typeAsc(expr: Expr, type: StellaType)
+    case ref(expr: Expr) // new
+    case deref(expr: Expr) // *
+    
+    case typeAsc(expr: Expr, type: StellaType) // as
+    case typeCast(expr: Expr, type: StellaType) // cast as
+    
     case abstraction(paramDecls: [ParamDecl], returnExpr: Expr)
     case tuple(exprs: [Expr])
     
@@ -123,6 +133,8 @@ public indirect enum Expr {
     case greaterThanOrEqual(left: Expr, right: Expr)
     case equal(left: Expr, right: Expr)
     case notEqual(left: Expr, right: Expr)
+    
+    case assign(lhs: Expr, rhs: Expr) // :=
     
     case `if`(condition: Expr, thenExpr: Expr, elseExpr: Expr)
     case `let`(patternBindings: [PatternBinding], body: Expr)
@@ -186,6 +198,9 @@ public indirect enum StellaType {
     case list(types: [StellaType])
     case record(fieldTypes: [RecordFieldType])
     case variant(fieldTypes: [VariantFieldType])
+    case top
+    case ref(type: StellaType)
+    case bot
     case `var`(name: String)
     
 }
