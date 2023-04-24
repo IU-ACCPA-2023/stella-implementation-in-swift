@@ -1,12 +1,3 @@
-//
-//  ast.swift
-//  
-//
-//  Created by Nikolai Kudasov on 27.03.2023.
-//
-
-public typealias ExtensionName = String
-
 // MARK: - Program
 
 public struct Program {
@@ -29,7 +20,7 @@ public enum LanguageDecl {
 
 public struct Extension {
     
-    var extensionNames: [ExtensionName]
+    var extensionNames: [String]
     
 }
 
@@ -52,6 +43,15 @@ public enum Decl {
         type: StellaType
     )
     
+    case declExceptionType(
+        exceptionType: StellaType
+    )
+    
+    case declExceptionVariant(
+        name: String,
+        variantType: StellaType
+    )
+    
 }
 
 public enum Annotation {
@@ -69,9 +69,6 @@ public struct ParamDecl {
 
 // MARK: - Expressions
 
-// TODO: - Murashko Artem 04.04.2023
-// Implement match, let, letrec
-
 public indirect enum Expr {
     
     case dotRecord(expr: Expr, label: String)
@@ -81,8 +78,13 @@ public indirect enum Expr {
     case constFalse
     case constUnit
     case constInt(value: Int)
+    case constMemory(mem: String)
     case `var`(name: String)
     
+    case panic
+    case `throw`(expr: Expr)
+    case tryCatch(tryExpr: Expr, pat: Pattern, fallbackExpr: Expr)
+    case tryWith(tryExpr: Expr, fallbackExpr: Expr)
     case inl(expr: Expr)
     case inr(expr: Expr)
 
@@ -111,12 +113,18 @@ public indirect enum Expr {
     case subtract(left: Expr, right: Expr)
     case logicOr(left: Expr, right: Expr)
     
-    case typeAsc(expr: Expr, type: StellaType)
+    case ref(expr: Expr) // new
+    case deref(expr: Expr) // *
+    
+    case typeAsc(expr: Expr, type: StellaType) // as
+    case typeCast(expr: Expr, type: StellaType) // cast as
+    
     case abstraction(paramDecls: [ParamDecl], returnExpr: Expr)
     case tuple(exprs: [Expr])
     
     case record(bindings: [Binding])
     case variant(label: String, rhs: Expr?)
+    case match(Expr, cases: [MatchCase])
     case list(exprs: [Expr])
     
     case lessThan(left: Expr, right: Expr)
@@ -126,14 +134,54 @@ public indirect enum Expr {
     case equal(left: Expr, right: Expr)
     case notEqual(left: Expr, right: Expr)
     
-    case `if`(condition: Expr, thenExpr: Expr, elseExpr: Expr)
+    case assign(lhs: Expr, rhs: Expr) // :=
     
-    case sequence(expr1: Expr, expr2: Expr)
+    case `if`(condition: Expr, thenExpr: Expr, elseExpr: Expr)
+    case `let`(patternBindings: [PatternBinding], body: Expr)
+    case letRec(patternBindings: [PatternBinding], body: Expr)
+    
+    case sequence(expr1: Expr, expr2: Expr?)
     
 }
     
 public struct Binding {
     var name: String
+    var rhs: Expr
+}
+
+
+// MARK: - Pattern
+
+public indirect enum Pattern {
+    
+    case variant(label: String, Pattern?)
+    case inl(pat: Pattern)
+    case inr(pat: Pattern)
+    case tuple(patterns: [Pattern])
+    case record(patterns: [LabeledPattern])
+    case list(patterns: [Pattern])
+    case cons(head: Pattern, tail: Pattern)
+    case `true`
+    case `false`
+    case unit
+    case `int`(n: Int)
+    case succ(n: Pattern)
+    case `var`(name: String)
+    
+}
+
+public struct MatchCase {
+    var pattern: Pattern
+    var expr: Expr
+}
+
+public struct LabeledPattern {
+    var label: String
+    var pattern: Pattern
+}
+
+public struct PatternBinding {
+    var pat: Pattern
     var rhs: Expr
 }
 
@@ -150,6 +198,9 @@ public indirect enum StellaType {
     case list(types: [StellaType])
     case record(fieldTypes: [RecordFieldType])
     case variant(fieldTypes: [VariantFieldType])
+    case top
+    case ref(type: StellaType)
+    case bot
     case `var`(name: String)
     
 }

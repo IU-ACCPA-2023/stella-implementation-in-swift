@@ -23,7 +23,9 @@ decl: (annotations += annotation)* 'fn' name = StellaIdent '(' (
     )? ')' ('->' returnType = stellatype)? (
         'throws' throwTypes+= stellatype (',' throwTypes+=stellatype)*
     )? '{' (localDecls += decl)* 'return' returnExpr = expr '}' # DeclFun
-    | 'type' name = StellaIdent '=' atype = stellatype          # DeclTypeAlias;
+    | 'type' name = StellaIdent '=' atype = stellatype          # DeclTypeAlias
+    | 'exception' 'type' '=' exceptionType=stellatype           # DeclExceptionType
+    | 'exception' 'variant' name=StellaIdent ':' variantType=stellatype #DeclExceptionVariant;
 
 annotation: 'inline' # InlineAnnotation;
 paramDecl: name = StellaIdent ':' paramType = stellatype;
@@ -36,8 +38,13 @@ expr:
     | 'false'                            # ConstFalse
     | 'unit'                             # ConstUnit
     | n = INTEGER                        # ConstInt
+    | mem = MemoryAddress                # ConstMemory
     | name = StellaIdent                 # Var
     // expr
+    | 'panic!'                    # Panic
+    | 'throw' '(' expr_=expr ')'  # Throw
+    | 'try' '{' tryExpr=expr '}' 'catch' '{' pat=pattern '=>' fallbackExpr=expr '}'  # TryCatch
+    | 'try' '{' tryExpr=expr '}' 'with' '{' fallbackExpr=expr '}'  # TryWith
     | 'inl' '(' expr_=expr ')'                     # Inl
     | 'inr' '(' expr_=expr ')'                     # Inr
     | 'cons' '(' head = expr ',' tail = expr ')'                     # ConsList
@@ -55,14 +62,17 @@ expr:
     // expr
     | fun = expr '(' (args += expr (',' args += expr)*)? ')' # Application
     // expr
-    | expr '*' expr   # Multiply
-    | expr '/' expr   # Divide
-    | expr 'and' expr # LogicAnd
+    | left=expr '*' right=expr   # Multiply
+    | left=expr '/' right=expr   # Divide
+    | left=expr 'and' right=expr # LogicAnd
+    | 'new' expr_=expr # Ref
+    | '*' expr_=expr   # Deref
     // expr
-    | expr '+' expr                        # Add
-    | expr '-' expr                        # Subtract
-    | expr 'or' expr                       # LogicOr
+    | left=expr '+' right=expr                        # Add
+    | left=expr '-' right=expr                        # Subtract
+    | left=expr 'or' right=expr                       # LogicOr
     | expr_ = expr 'as' type_ = stellatype # TypeAsc
+    | expr_ = expr 'cast' 'as' type_ = stellatype # TypeCast
     | 'fn' '(' (
         paramDecls += paramDecl (',' paramDecls += paramDecl)*
     )? ')' '{' 'return' returnExpr = expr '}'       # Abstraction
@@ -70,9 +80,9 @@ expr:
     | '{' bindings += binding (',' bindings += binding)* '}' # Record
     | '<|' label = StellaIdent ('=' rhs = expr)? '|>' # Variant
     | 'match' expr '{' (
-        cases += match_case ('|' cases += match_case)*
-    )? '}'                                         # match
-    | '[' (exprs += expr (',' exprs += expr)*)? ']' # List
+        cases += matchCase ('|' cases += matchCase)*
+    )? '}'                                         # Match
+    | '[' (exprs += expr (',' exprs += expr))? ']' # List
     // expr
     | left = expr '<' right = expr  # LessThan
     | left = expr '<=' right = expr # LessThanOrEqual
@@ -81,21 +91,22 @@ expr:
     | left = expr '==' right = expr # Equal
     | left = expr '!=' right = expr # NotEqual
     // expr
+    | lhs = expr ':=' rhs = expr # Assign
     | 'if' condition = expr 'then' thenExpr = expr 'else' elseExpr = expr # If
     | 'let' patternBindings+=patternBinding (',' patternBindings+=patternBinding)* 'in' body = expr           # Let
-    | 'letrec' patternBindings+=patternBinding (',' patternBindings+=patternBinding)* 'in' body = expr           # Let
+    | 'letrec' patternBindings+=patternBinding (',' patternBindings+=patternBinding)* 'in' body = expr           # LetRec
     | '(' expr_ = expr ')'                                                        # ParenthesisedExpr
-    | expr1 = expr ';' expr2 = expr # Sequence
-    | expr_ = expr ';' # TerminatingSemicolon;
+    | expr1 = expr ';' (expr2 = expr)? # Sequence
+    ;
 
 patternBinding: pat=pattern '=' rhs=expr ;
 
 binding: name = StellaIdent '=' rhs = expr;
 
-match_case: pattern_ = pattern '=>' expr_ = expr;
+matchCase: pattern_ = pattern '=>' expr_ = expr;
 
 pattern:
-    '<|' label = StellaIdent ('=' pattern_ = pattern)? '|>'                # PatternVariant
+    '<|' label = StellaIdent ('=' pattern_ = pattern)? '|>'     # PatternVariant
     | 'inl' '(' pattern_ = pattern ')' # PatternInl
     | 'inr' '(' pattern_ = pattern ')' # PatternInr
     | '{' (patterns += pattern (',' patterns += pattern)*)? '}' # PatternTuple
@@ -110,11 +121,11 @@ pattern:
     | 'true'                                                    # PatternTrue
     | 'unit'                                                    # PatternUnit
     | n = INTEGER                                               # PatternInt
-    | 'succ' '(' pattern_ = pattern ')'                                # PatternSucc
+    | 'succ' '(' pattern_ = pattern ')'                         # PatternSucc
     | name = StellaIdent                                        # PatternVar
-    | '(' pattern_ = pattern ')'                                           # ParenthesisedPattern;
+    | '(' pattern_ = pattern ')'                                # ParenthesisedPattern;
 
-labelledPattern: label = StellaIdent '=' pattern;
+labelledPattern: label = StellaIdent '=' pattern_ = pattern;
 
 stellatype:
     'Bool'  # TypeBool
@@ -130,13 +141,16 @@ stellatype:
             ',' fieldTypes += recordFieldType
         )*
      '}' # TypeRecord
-    | '{' (
+    | '<|' (
         fieldTypes += variantFieldType (
             ',' fieldTypes += variantFieldType
         )*
-    )? '}'                                                      # TypeVariant
+    )? '|>'                                                     # TypeVariant
     | '[' (types += stellatype (',' types += stellatype)*)? ']' # TypeList
     | 'Unit'                                                    # TypeUnit
+    | 'Top'                                                     # TypeTop
+    | '&' type_=stellatype                                      # TypeRef
+    | 'Bot'                                                     # TypeBottom
     | name = StellaIdent                                        # TypeVar
     | '(' type_ = stellatype ')' # TypeParens;
 

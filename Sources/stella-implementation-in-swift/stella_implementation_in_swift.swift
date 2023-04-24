@@ -9,7 +9,7 @@ public struct stella_implementation_in_swift {
         
         let parser = try stellaParser(CommonTokenStream(lexer))
         let ctx = try parser.program()
-        let program = try build_program(ctx: ctx)
+        let program = try buildProgram(ctx: ctx)
         
         try typecheck(program: program)
     }
@@ -24,4 +24,5 @@ public struct stella_implementation_in_swift {
             print("Parse Error occurred. See the message above.")
         }
     }
+    
 }
