@@ -38,6 +38,17 @@ public enum Decl {
         returnExpr: Expr
     )
     
+    case declFunGeneric(
+        annotations: [Annotation],
+        name: String,
+        generics: [String],
+        paramDecls: [ParamDecl],
+        returnType: StellaType?,
+        throwTypes: [StellaType],
+        localDecls: [Decl],
+        returnExpr: Expr
+    )
+    
     case declTypeAlias(
         name: String,
         type: StellaType
@@ -105,6 +116,7 @@ public indirect enum Expr {
     case unfold(type: StellaType, expr: Expr)
     
     case application(expr: Expr, exprs: [Expr])
+    case typeApplication(expr: Expr, types: [StellaType])
     
     case multiply(left: Expr, right: Expr)
     case divide(left: Expr, right: Expr)
@@ -139,6 +151,7 @@ public indirect enum Expr {
     case `if`(condition: Expr, thenExpr: Expr, elseExpr: Expr)
     case `let`(patternBindings: [PatternBinding], body: Expr)
     case letRec(patternBindings: [PatternBinding], body: Expr)
+    case typeAbstraction(generics: [String], expr: Expr) // generic
     
     case sequence(expr1: Expr, expr2: Expr?)
     
@@ -193,6 +206,7 @@ public indirect enum StellaType {
     case nat
     case unit
     case fun(parameterTypes: [StellaType], returnType: StellaType)
+    case forAll(types: [String], type: StellaType)
     case sum(left: StellaType, right: StellaType)
     case tuple(types: [StellaType])
     case list(types: [StellaType])
