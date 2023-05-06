@@ -97,6 +97,20 @@ public protocol stellaParserListener: ParseTreeListener {
 	 */
 	func exitDeclFun(_ ctx: stellaParser.DeclFunContext)
 	/**
+	 * Enter a parse tree produced by the {@code DeclFunGeneric}
+	 * labeled alternative in {@link stellaParser#decl}.
+	 - Parameters:
+	   - ctx: the parse tree
+	 */
+	func enterDeclFunGeneric(_ ctx: stellaParser.DeclFunGenericContext)
+	/**
+	 * Exit a parse tree produced by the {@code DeclFunGeneric}
+	 * labeled alternative in {@link stellaParser#decl}.
+	 - Parameters:
+	   - ctx: the parse tree
+	 */
+	func exitDeclFunGeneric(_ ctx: stellaParser.DeclFunGenericContext)
+	/**
 	 * Enter a parse tree produced by the {@code DeclTypeAlias}
 	 * labeled alternative in {@link stellaParser#decl}.
 	 - Parameters:
@@ -220,6 +234,20 @@ public protocol stellaParserListener: ParseTreeListener {
 	   - ctx: the parse tree
 	 */
 	func exitVar(_ ctx: stellaParser.VarContext)
+	/**
+	 * Enter a parse tree produced by the {@code TypeAbstraction}
+	 * labeled alternative in {@link stellaParser#expr}.
+	 - Parameters:
+	   - ctx: the parse tree
+	 */
+	func enterTypeAbstraction(_ ctx: stellaParser.TypeAbstractionContext)
+	/**
+	 * Exit a parse tree produced by the {@code TypeAbstraction}
+	 * labeled alternative in {@link stellaParser#expr}.
+	 - Parameters:
+	   - ctx: the parse tree
+	 */
+	func exitTypeAbstraction(_ ctx: stellaParser.TypeAbstractionContext)
 	/**
 	 * Enter a parse tree produced by the {@code Divide}
 	 * labeled alternative in {@link stellaParser#expr}.
@@ -738,6 +766,20 @@ public protocol stellaParserListener: ParseTreeListener {
 	   - ctx: the parse tree
 	 */
 	func exitLogicAnd(_ ctx: stellaParser.LogicAndContext)
+	/**
+	 * Enter a parse tree produced by the {@code TypeApplication}
+	 * labeled alternative in {@link stellaParser#expr}.
+	 - Parameters:
+	   - ctx: the parse tree
+	 */
+	func enterTypeApplication(_ ctx: stellaParser.TypeApplicationContext)
+	/**
+	 * Exit a parse tree produced by the {@code TypeApplication}
+	 * labeled alternative in {@link stellaParser#expr}.
+	 - Parameters:
+	   - ctx: the parse tree
+	 */
+	func exitTypeApplication(_ ctx: stellaParser.TypeApplicationContext)
 	/**
 	 * Enter a parse tree produced by the {@code LetRec}
 	 * labeled alternative in {@link stellaParser#expr}.
@@ -1360,6 +1402,20 @@ public protocol stellaParserListener: ParseTreeListener {
 	   - ctx: the parse tree
 	 */
 	func exitTypeFun(_ ctx: stellaParser.TypeFunContext)
+	/**
+	 * Enter a parse tree produced by the {@code TypeForAll}
+	 * labeled alternative in {@link stellaParser#stellatype}.
+	 - Parameters:
+	   - ctx: the parse tree
+	 */
+	func enterTypeForAll(_ ctx: stellaParser.TypeForAllContext)
+	/**
+	 * Exit a parse tree produced by the {@code TypeForAll}
+	 * labeled alternative in {@link stellaParser#stellatype}.
+	 - Parameters:
+	   - ctx: the parse tree
+	 */
+	func exitTypeForAll(_ ctx: stellaParser.TypeForAllContext)
 	/**
 	 * Enter a parse tree produced by the {@code TypeRecord}
 	 * labeled alternative in {@link stellaParser#stellatype}.
