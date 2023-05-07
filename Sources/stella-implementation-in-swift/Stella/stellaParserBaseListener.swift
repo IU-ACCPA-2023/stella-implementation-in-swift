@@ -106,6 +106,19 @@ open class stellaParserBaseListener: stellaParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	open func enterDeclFunGeneric(_ ctx: stellaParser.DeclFunGenericContext) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	open func exitDeclFunGeneric(_ ctx: stellaParser.DeclFunGenericContext) { }
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	open func enterDeclTypeAlias(_ ctx: stellaParser.DeclTypeAliasContext) { }
 	/**
 	 * {@inheritDoc}
@@ -217,6 +230,19 @@ open class stellaParserBaseListener: stellaParserListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	open func exitVar(_ ctx: stellaParser.VarContext) { }
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	open func enterTypeAbstraction(_ ctx: stellaParser.TypeAbstractionContext) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	open func exitTypeAbstraction(_ ctx: stellaParser.TypeAbstractionContext) { }
 
 	/**
 	 * {@inheritDoc}
@@ -698,6 +724,19 @@ open class stellaParserBaseListener: stellaParserListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	open func exitLogicAnd(_ ctx: stellaParser.LogicAndContext) { }
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	open func enterTypeApplication(_ ctx: stellaParser.TypeApplicationContext) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	open func exitTypeApplication(_ ctx: stellaParser.TypeApplicationContext) { }
 
 	/**
 	 * {@inheritDoc}
@@ -1283,6 +1322,19 @@ open class stellaParserBaseListener: stellaParserListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	open func exitTypeFun(_ ctx: stellaParser.TypeFunContext) { }
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	open func enterTypeForAll(_ ctx: stellaParser.TypeForAllContext) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	open func exitTypeForAll(_ ctx: stellaParser.TypeForAllContext) { }
 
 	/**
 	 * {@inheritDoc}

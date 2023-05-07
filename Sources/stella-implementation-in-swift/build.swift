@@ -28,6 +28,12 @@ public func buildType(ctx: stellaParser.StellatypeContext) throws -> StellaType 
             returnType: buildType(ctx: ctx.returnType)
         )
     
+    case let ctx as stellaParser.TypeForAllContext:
+        return try .forAll(
+            types: ctx.types.map { $0.getText()! },
+            type: buildType(ctx: ctx.type_)
+        )
+    
     case let ctx as stellaParser.TypeSumContext:
         return try .sum(
             left: buildType(ctx: ctx.left),
@@ -227,6 +233,12 @@ public func buildExpr(ctx: stellaParser.ExprContext) throws -> Expr {
             exprs: ctx.args.map(buildExpr)
         )
         
+    case let ctx as stellaParser.TypeApplicationContext:
+        return try .typeApplication(
+            expr: buildExpr(ctx: ctx.fun),
+            types: ctx.types.map(buildType)
+        )
+        
     case let ctx as stellaParser.MultiplyContext:
         return try .multiply(
             left: buildExpr(ctx: ctx.left),
@@ -383,6 +395,12 @@ public func buildExpr(ctx: stellaParser.ExprContext) throws -> Expr {
                                                              rhs: try buildExpr(ctx: $0.rhs)) },
             body: buildExpr(ctx: ctx.body)
         )
+        
+    case let ctx as stellaParser.TypeAbstractionContext:
+        return try .typeAbstraction(
+            generics: ctx.generics.map { $0.getText()! },
+            expr: buildExpr(ctx: ctx.expr_)
+        )
 
     case let ctx as stellaParser.SequenceContext:
         return try .sequence(
@@ -455,6 +473,18 @@ public func buildDecl(ctx: stellaParser.DeclContext) throws -> Decl {
         return try .declFun(
             annotations: [], // TODO: annotations
             name: ctx.name.getText()!,
+            paramDecls: ctx.paramDecls.map(buildParamDecl),
+            returnType: ctx.returnType.map(buildType),
+            throwTypes: ctx.throwTypes.map(buildType),
+            localDecls: ctx.localDecls.map(buildDecl),
+            returnExpr: buildExpr(ctx: ctx.returnExpr!)
+        )
+        
+    case let ctx as stellaParser.DeclFunGenericContext:
+        return try .declFunGeneric(
+            annotations: [], // TODO: annotations
+            name: ctx.name.getText()!,
+            generics: ctx.generics.map { $0.getText()! },
             paramDecls: ctx.paramDecls.map(buildParamDecl),
             returnType: ctx.returnType.map(buildType),
             throwTypes: ctx.throwTypes.map(buildType),

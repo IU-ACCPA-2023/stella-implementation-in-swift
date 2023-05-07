@@ -9,6 +9,9 @@ public func typecheck(decl: Decl) {
     switch decl {
     case let .declFun(_, name, _, _, _, _, _):
         print("decl function, name = \(name)")
+        
+    case let .declFunGeneric(_, name, _, _, _, _, _, _):
+        print("decl function generic, name = \(name)")
             
     case let .declTypeAlias(name, _):
         print("decl type alias, name = \(name)")
